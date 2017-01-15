@@ -1,0 +1,134 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07-ene-2017, 18:45:32
+    Author     : Antonio
+*/
+
+body{
+    min-height: 100vh;
+    background-color: #ebeced;
+}
+.container-fluid{
+    font-family: 'Lato', sans-serif;
+}
+.cabecera{
+    background: linear-gradient(#212121, #070707);
+}
+.cuerpo{
+    margin-top: 6rem;
+}
+
+
+.logo{
+    max-height: 80px;
+    margin-top: 1rem;
+}
+.buscador{
+    margin-top: 3rem;
+}
+.user, .pass{
+    margin-top: 1rem;
+    width: 150px;
+    height: 3rem;
+}
+.btn-login{
+    margin-top: 1rem;
+}
+.log-registro{
+    margin-top: 1rem;
+    margin-right: 2rem; 
+    color: #dbdbdb;
+    padding-bottom: 2rem;
+}
+.btn-pie{
+    width: 60px;
+}
+
+.categorias{
+    padding-right: 3rem;
+    background-color: #070707;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+}
+.categorias ul{
+    margin-top: 2rem;
+    list-style: none;
+    padding-bottom: 1rem;
+}
+.categorias a{
+    font-size: 18px;
+    color: #dbdbdb;
+}
+
+
+.titulo-producto-slide{
+    text-shadow: none;
+    padding: 1rem;
+    color: black;
+    background-color: rgba(255,255,255,0.8);
+}
+.titulo-slide{
+    position: absolute;
+    top: 0;
+    background-color: rgba(255,255,255,0.8);
+    padding: 1rem;
+    z-index: 2;
+}
+.carousel-index{
+    margin-left: 15%;
+    width: 70%;
+    background-color: white;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
+.imagen-idx{
+    margin: auto;
+    max-height: 300px;
+    min-height: 300px;
+    width: auto;
+}
+
+
+.registros_pagina{
+    width: 10%;
+}
+.tabla-productos{
+    width: 100%;
+    margin: auto;
+    margin-top: 3rem;
+    background-color: white;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+.tabla-productos td, th{
+    font-size: 14px;
+    border: 1px solid #c6c6c6;
+    padding: 1rem 1rem;
+    text-align: center;
+}
+
+
+.cuerpo-prod{
+   background-color: white; 
+   box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+.carousel-prod{
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    background-color: white;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
+.imagen-prod{
+    margin: auto;
+    max-height: 350px;
+    min-height: 350px;
+    width: auto;
+}
+.prod-info{
+    padding: 3rem;
+}
+.lista-caracts{
+    list-style: none;
+}
