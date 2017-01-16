@@ -8,71 +8,101 @@ and open the template in the editor.
     Author     : Antonio
 */
 
+/*generico*/
 body{
     min-height: 100vh;
     background-color: #ebeced;
 }
 .container-fluid{
-    font-family: 'Lato', sans-serif;
+    font-family: 'Bitter', serif;
 }
 .cabecera{
-    background: linear-gradient(#212121, #070707);
+    padding-top: 2rem;
+    background: linear-gradient(#0a483f, #259a89); 
 }
 .cuerpo{
     margin-top: 6rem;
 }
+.btn{
+    color: #249994;
+}
 
 
+/*cabecera*/
 .logo{
+    margin-top: 5px;
     max-height: 80px;
-    margin-top: 1rem;
 }
 .buscador{
     margin-top: 3rem;
 }
 .user, .pass{
-    margin-top: 1rem;
     width: 150px;
     height: 3rem;
 }
-.btn-login{
-    margin-top: 1rem;
-}
 .log-registro{
-    margin-top: 1rem;
     margin-right: 2rem; 
     color: #dbdbdb;
     padding-bottom: 2rem;
 }
-.btn-pie{
-    width: 60px;
+.carrito-perfil{
+    margin-top: 2rem;
+    margin-right: 4rem; 
+    color: #dbdbdb;
+    padding-bottom: 3rem;
+}
+.carrito-perfil ul{
+    list-style: none;
+}.carrito-perfil li{
+    padding-top: 3px;
+}
+.carrito-perfil a{
+    font-size: 15px;
+    color:white;
+}
+#cerrar-sesion{
+    font-size: 14px;
+}
+.carrito-perfil a:hover {
+    color: #7be2d0;
+    text-decoration: none;
 }
 
+
+/*menu navegacion index*/
 .categorias{
     padding-right: 3rem;
-    background-color: #070707;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    background-color: white;
+    box-shadow: 2px 2px 3px rgba(36,153,136,0.6);
 }
-.categorias ul{
-    margin-top: 2rem;
+.div-cat{
+    margin-bottom: 2rem;
+}
+.categorias ul{   
     list-style: none;
-    padding-bottom: 1rem;
+    padding: 2rem 0 2rem 2rem;
 }
 .categorias a{
     font-size: 18px;
-    color: #dbdbdb;
+    color: #106558;
+}
+.categorias li a:hover {
+    color: #1cab95;
+    text-decoration: none;
 }
 
 
+/*slide*/
 .titulo-producto-slide{
     text-shadow: none;
     padding: 1rem;
-    color: black;
+    color: #249988;
     background-color: rgba(255,255,255,0.8);
 }
 .titulo-slide{
     position: absolute;
     top: 0;
+    color: #249988;
     background-color: rgba(255,255,255,0.8);
     padding: 1rem;
     z-index: 2;
@@ -81,7 +111,7 @@ body{
     margin-left: 15%;
     width: 70%;
     background-color: white;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    box-shadow: 2px 2px 3px rgba(36,153,136,0.6);
 }
 .imagen-idx{
     margin: auto;
@@ -91,34 +121,58 @@ body{
 }
 
 
+/*tabla de productos*/
+.cabecera-tabla-productos{
+    padding-bottom: 6rem;
+    color: #118674;
+}
+.num_registros_pagina{
+    color: #168b86;
+}
 .registros_pagina{
-    width: 10%;
+    width: 100px;
 }
 .tabla-productos{
     width: 100%;
     margin: auto;
     margin-top: 3rem;
     background-color: white;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 3px rgba(36,153,136,0.6);
+}
+.tabla-productos tr{
+    border: 1px solid #c6c6c6;
+}
+.tabla-productos th{
+    color: #249988;
 }
 .tabla-productos td, th{
     font-size: 14px;
-    border: 1px solid #c6c6c6;
     padding: 1rem 1rem;
     text-align: center;
 }
+.tabla-productos td{
+    width: 15%;
+}
+.tabla-productos td:nth-child(1), .tabla-productos td:nth-child(2){
+    width: 30%;
+}
+
+.btn-pagina{
+    width: 50px;
+}
 
 
+/*consultar un producto*/
 .cuerpo-prod{
    background-color: white; 
-   box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+   box-shadow: 2px 2px 3px rgba(36,153,136,0.6);
 }
 .carousel-prod{
     margin-top: 3rem;
     margin-bottom: 2rem;
     width: 100%;
     background-color: white;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
 }
 .imagen-prod{
     margin: auto;
@@ -131,4 +185,89 @@ body{
 }
 .lista-caracts{
     list-style: none;
+}
+
+
+/*pie*/
+.pie{
+    color: white;
+    background: linear-gradient(#259a89, #0a483f);    
+    margin-top: 4rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+.pie a{
+    color: white;
+}
+
+
+/*pag-emergente registro*/
+.loginmodal-container {
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  background-color: #F7F7F7;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 2px 2px 3px rgba(36,153,136,0.6);
+  overflow: hidden;
+}
+
+.loginmodal-container h1 {
+  text-align: center;
+  font-size: 1.8em;
+}
+
+.loginmodal-container input[type=button] {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.loginmodal-container input[type=text],.loginmodal-container input[type=password] {
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.loginmodal-container input[type=text]:hover, input[type=password]:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.loginmodal {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+}
+
+.loginmodal-submit {
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+  background-color: #259a89;
+  padding: 17px 0px;
+  font-size: 14px;
+}
+
+.loginmodal-submit:hover {
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #17ad97;  
 }

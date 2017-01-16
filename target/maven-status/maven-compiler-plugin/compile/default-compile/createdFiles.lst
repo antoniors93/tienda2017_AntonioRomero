@@ -1,6 +1,7 @@
 es\albarregas\daofactory\MySQLDAOFactory.class
 es\albarregas\DAO\ImagenesDAO.class
 es\albarregas\DAO\IUsuariosDAO.class
+es\albarregas\Controllers\Registro.class
 es\albarregas\DAO\ICaractsProdDAO.class
 es\albarregas\daofactory\DAOFactory.class
 es\albarregas\Controllers\Login.class

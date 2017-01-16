@@ -12,70 +12,75 @@
     <head>
         <title>Productos</title>
         <jsp:include page="../INC/enlaces.jsp"></jsp:include>
-        <script type="text/javascript">
-                //funcion para paginar
-            function pagination(num){
-                    var req_num_row=num;
-                    var $tr=jQuery('tbody tr');
-                    var total_num_row = $tr.length;
-                    var num_pages = 0;
+            <script type="text/javascript">
+                    //funcion para paginar
+                function pagination(num){
+                        var req_num_row=num;
+                        var $tr=jQuery('tbody tr');
+                        var total_num_row = $tr.length;
+                        var num_pages = 0;
                     
                     if (total_num_row % req_num_row == 0) {
-                    num_pages = total_num_row / req_num_row;
-                }
-                if (total_num_row % req_num_row >= 1) {
-                    num_pages = total_num_row / req_num_row;
-                    num_pages++;
-                    num_pages = Math.floor(num_pages++);
-                }
-                jQuery('.pagination').empty();
-                for (var i = 1; i <= num_pages; i++) {
-                    jQuery('.pagination').append('<a class="btn-pie btn btn-default" href="#">' + i + '</a>');
-                }
-                $tr.each(function (i) {
-                    jQuery(this).hide();
-                    if (i + 1 <= req_num_row) {
-                        $tr.eq(i).show();
+                        num_pages = total_num_row / req_num_row;
                     }
-                    
+                    if (total_num_row % req_num_row >= 1) {
+                        num_pages = total_num_row / req_num_row;
+                        num_pages++;
+                        num_pages = Math.floor(num_pages++);
+                    }
+                    jQuery('.pagination').empty();
+                    for (var i = 1; i <= num_pages; i++) {
+                        jQuery('.pagination').append('<a class="btn-pagina btn btn-default" href="#">' + i + '</a>');
+                    }
+                    $tr.each(function (i) {
+                        jQuery(this).hide();
+                        if (i + 1 <= req_num_row) {
+                            $tr.eq(i).show();
+                        }
 
+
+                    });
+                    jQuery('.pagination a').click(function (e) {
+                        e.preventDefault();
+                        $tr.hide();
+                        var page = jQuery(this).text();
+                        var temp = page - 1;
+                        var start = temp * req_num_row;
+                        for (var i = 0; i < req_num_row; i++) {
+                            $tr.eq(start + i).show();
+                        }
+                    });
+                }
+                jQuery('document').ready(function () {
+                    pagination(5);
                 });
-                jQuery('.pagination a').click(function (e) {
-                    e.preventDefault();
-                    $tr.hide();
-                    var page = jQuery(this).text();
-                    var temp = page - 1;
-                    var start = temp * req_num_row;
-                    for (var i = 0; i < req_num_row; i++) {
-                        $tr.eq(start + i).show();
-                    }
-                });
-            }
-            jQuery('document').ready(function () {
-                pagination(10);
-            });
-        </script>
+                
+                
+            </script>
         </head>
         <body>
         <jsp:include page="../INC/cabecera.jsp"></jsp:include>
             <div class="container-fluid cuerpo"> 
                 <div class="row">
                     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-                        <div class="registros_pagina ">
-                            <p>Nº de registros</p>
-                        <select class="form-control  btn btn-default" onchange="pagination(value);">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
-                            <option value="50">50</option>
-                        </select>
-                        </div>
-                        <h2 class="titulo-tabla-productos text-center">
-                        <c:if test="${param.buscar!=null}">
-                            <c:out value='"${param.palabra}"'/> 
-                        </c:if>
-                        <c:out value="${param.op}"/>
-                    </h2>
+                        <div class="cabecera-tabla-productos">
+                            <div class="num_registros_pagina col-sm-2 col-xs-6">
+                                <p>Nº de registros</p>
+                                <select class="form-control registros_pagina btn btn-default" onchange="pagination(value);">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+                            <h2 class="titulo-tabla-productos text-center col-sm-8 col-xs-6">
+                            <c:if test="${param.buscar!=null}">
+                                <c:out value='"${param.palabra}"'/> 
+                            </c:if>
+                            <c:out value="${param.op}"/>
+                        </h2>
+                    </div>
                     <table id="tabla" class="tabla-productos">
                         <thead>
                             <tr>
@@ -116,12 +121,13 @@
                             </c:if>
                         </tbody>
                     </table>
-                    <div class="pagination col-xs-12 col-sm-offset-1 col-sm-10">
+                    <div class="pagination">
 
                     </div>
                 </div>                           
             </div>
         </div>
+        <jsp:include page="../INC/pie.jsp"></jsp:include>
         <script>
 
             //icono de ascendente o descendente
@@ -174,18 +180,21 @@
                 uno *= -1;
                 var n = $(this).prevAll().length;
                 sortTable(uno, n);
+                pagination(5);
             });
             $("#marca").click(function () {
                 dos *= -1;
                 var n = $(this).prevAll().length;
                 sortTable(dos, n);
+                pagination(5);
             });
             $("#precio").click(function () {
                 tres *= -1;
                 var n = $(this).prevAll().length;
                 sortTable(tres, n);
+                pagination(5);
             });
-
+            
 
 
 
@@ -208,13 +217,12 @@
                             showRow = true;
                             break;
                         }
-                    }
-
+                    }                    
                     if (showRow) {
                         row.style.display = null;
                     }
-                }
+                }               
             }
-        </script>
+        </script>        
     </body>
 </html>

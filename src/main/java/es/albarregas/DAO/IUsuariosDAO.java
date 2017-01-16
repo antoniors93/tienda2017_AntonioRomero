@@ -13,5 +13,6 @@ import es.albarregas.beans.Usuarios;
 public interface IUsuariosDAO {
     
     public Usuarios getUsuarios(String UserName);
+    public String insertUsuario(String UserName, String Password);
 
 }

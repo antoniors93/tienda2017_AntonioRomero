@@ -36,11 +36,11 @@
                                 </c:forEach>    
                             </div>
                             <!-- Controls -->
-                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" style="background: linear-gradient(-90deg, white, #69c1a9);">
                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next" style="background: linear-gradient(-90deg, #69c1a9, white);">
                                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-                                
+        <jsp:include page="../INC/pie.jsp"></jsp:include>                        
 <script>
     $(".carousel-indicators li:first").addClass("active");
     $(".carousel-inner .item:first").addClass("active");

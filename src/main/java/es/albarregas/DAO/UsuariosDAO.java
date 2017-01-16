@@ -40,5 +40,22 @@ public class UsuariosDAO implements IUsuariosDAO {
         ConnectionFactory.closeConnection();
         return usuario;
         }
+
+    @Override
+    public String insertUsuario(String UserName, String Password) {
+        String mensaje = null;
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("insert into Usuarios (UserName,Clave,UltimoAcceso,Tipo) values "
+                    + "('"+UserName+"','"+Password+"',now(),'u')");
+                mensaje = "SUCCESS";
+            } catch (SQLException e) {
+                mensaje = "FAILURE";
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+        return mensaje;
+    }
     }
     

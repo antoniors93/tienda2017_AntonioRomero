@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,8 +40,19 @@ public class Login extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IUsuariosDAO usr = daof.getUsuarios();
-            Usuarios usuario = usr.getUsuarios("admin");
-            out.println(usuario.getUltimoAcceso());
+            Usuarios usuario = usr.getUsuarios(request.getParameter("user"));
+
+            String mensaje = "";
+            if (usuario == null) {
+                mensaje = "FAILURE";
+            } else if (usuario.getClave().equals(request.getParameter("pass"))) {
+                HttpSession sesion = request.getSession(true);
+                sesion.setAttribute("login", usuario);
+                mensaje = "SUCCESS";
+            } else {
+                mensaje = "FAILURE";
+            }
+            response.getWriter().write(mensaje);
         }
     }
 
