@@ -5,7 +5,9 @@
  */
 package es.albarregas.Controllers;
 
+import es.albarregas.DAO.IClientesDAO;
 import es.albarregas.DAO.IUsuariosDAO;
+import es.albarregas.beans.Clientes;
 import es.albarregas.beans.Usuarios;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
@@ -40,13 +42,16 @@ public class Login extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IUsuariosDAO usr = daof.getUsuarios();
-            Usuarios usuario = usr.getUsuarios(request.getParameter("user"));
+            Usuarios usuario = usr.getUsuarios(request.getParameter("email"));
 
             String mensaje = "";
             if (usuario == null) {
                 mensaje = "FAILURE";
             } else if (usuario.getClave().equals(request.getParameter("pass"))) {
-                HttpSession sesion = request.getSession(true);
+                IClientesDAO client = daof.getClientes();
+                Clientes cliente=client.getCliente(usuario.getIdUsuario());
+                HttpSession sesion = request.getSession(true);               
+                sesion.setAttribute("cliente", cliente);            
                 sesion.setAttribute("login", usuario);
                 mensaje = "SUCCESS";
             } else {

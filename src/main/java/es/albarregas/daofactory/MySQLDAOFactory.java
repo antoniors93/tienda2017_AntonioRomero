@@ -2,8 +2,10 @@ package es.albarregas.daofactory;
 
 import es.albarregas.DAO.CaractsProdDAO;
 import es.albarregas.DAO.CategoriasDAO;
+import es.albarregas.DAO.ClientesDAO;
 import es.albarregas.DAO.ICaractsProdDAO;
 import es.albarregas.DAO.ICategoriasDAO;
+import es.albarregas.DAO.IClientesDAO;
 import es.albarregas.DAO.IImagenesDAO;
 import es.albarregas.DAO.IProductosDAO;
 import es.albarregas.DAO.IUsuariosDAO;
@@ -33,5 +35,9 @@ public class MySQLDAOFactory extends DAOFactory{
     
     public IImagenesDAO getImagenes() {
         return new ImagenesDAO();
+    }
+    
+    public IClientesDAO getClientes(){
+        return new ClientesDAO();
     }
 }

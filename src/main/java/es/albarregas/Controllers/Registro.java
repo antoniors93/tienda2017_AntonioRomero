@@ -5,7 +5,9 @@
  */
 package es.albarregas.Controllers;
 
+import es.albarregas.DAO.IClientesDAO;
 import es.albarregas.DAO.IUsuariosDAO;
+import es.albarregas.beans.Clientes;
 import es.albarregas.beans.Usuarios;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
@@ -41,15 +43,23 @@ public class Registro extends HttpServlet {
            
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IUsuariosDAO usersDao = daof.getUsuarios();
-            String mensaje="FAILURE"; 
+            IClientesDAO clientDao = daof.getClientes();
+            String mensaje="INCOMPLETE"; 
             
-            if(request.getParameter("user")!=""&&request.getParameter("pass")!=""){
-            mensaje=usersDao.insertUsuario(request.getParameter("user"), request.getParameter("pass"));
+            if(request.getParameter("email")!=""&&request.getParameter("pass")!=""){
+                if(request.getParameter("email").matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")){
+                    mensaje=usersDao.insertUsuario(request.getParameter("email"), request.getParameter("pass"));                   
+                }else{
+                    mensaje="FAILURE";
+                }
             
             if(mensaje.equalsIgnoreCase("SUCCESS")){
-                Usuarios usuario=usersDao.getUsuarios(request.getParameter("user"));
+                Usuarios usuario=usersDao.getUsuarios(request.getParameter("email"));
+                clientDao.insertCliente(usuario.getIdUsuario());
+                Clientes cliente=clientDao.getCliente(usuario.getIdUsuario());
                 HttpSession sesion= request.getSession(true);
                 sesion.setAttribute("login", usuario);
+                sesion.setAttribute("cliente", cliente);
             }
             }
             response.getWriter().write(mensaje);

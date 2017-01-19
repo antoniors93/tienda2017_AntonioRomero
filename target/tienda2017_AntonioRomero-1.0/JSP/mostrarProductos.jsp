@@ -52,10 +52,10 @@
                     });
                 }
                 jQuery('document').ready(function () {
-                    pagination(5);
+                    pagination(10);
                 });
-                
-                
+
+
             </script>
         </head>
         <body>
@@ -63,29 +63,52 @@
             <div class="container-fluid cuerpo"> 
                 <div class="row">
                     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-                        <div class="cabecera-tabla-productos">
-                            <div class="num_registros_pagina col-sm-2 col-xs-6">
-                                <p>Nº de registros</p>
-                                <select class="form-control registros_pagina btn btn-default" onchange="pagination(value);">
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                    <option value="50">50</option>
-                                </select>
-                            </div>
-                            <h2 class="titulo-tabla-productos text-center col-sm-8 col-xs-6">
-                            <c:if test="${param.buscar!=null}">
+                        <div class="div-breadcrumb col-xs-12 col-sm-12">
+                            <ul class="breadcrumb col-sm-6">
+                            <li><a href="${contexto}/">Inicio</a></li>
+                            <li class="active">
+                                <c:if test="${param.opcion=='all'}">
+                                    <c:out value="Catálogo de productos"/>
+                                </c:if>
+                                <c:if test="${param.opcion=='s'}">
+                                    <c:out value="Productos en oferta"/>
+                                </c:if>
+                                <c:if test="${param.palabra!=null}">
+                                    <c:out value="Búsqueda"/> 
+                                </c:if>
+                                <c:if test="${param.cat!=null}">
+                                    <c:out value="${param.cat}"/>
+                                </c:if>                               
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="cabecera-tabla-productos">
+                        <div class="num_registros_pagina col-sm-2 col-xs-6">
+                            <p>Nº de registros</p>
+                            <select class="form-control registros_pagina btn btn-default" onchange="pagination(value);">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                            </select>
+                        </div>
+                        <h2 class="titulo-tabla-productos text-center col-sm-8 col-xs-6">
+                            <c:if test="${param.opcion=='all'}">
+                                <c:out value="Catálogo de productos"/>
+                            </c:if>
+                            <c:if test="${param.opcion=='s'}">
+                                <c:out value="Productos en oferta"/>
+                            </c:if>
+                            <c:if test="${param.palabra!=null}">
                                 <c:out value='"${param.palabra}"'/> 
                             </c:if>
-                            <c:out value="${param.op}"/>
+                            <c:out value="${param.cat}"/>
                         </h2>
                     </div>
                     <table id="tabla" class="tabla-productos">
                         <thead>
                             <tr>
                                 <th>
-                                    <input id="buscar" type="text" class="form-control buscador-tabla" placeholder="Escriba algo para filtrar" />
                                 </th>
                                 <th id="nombre">Producto <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></i></th>
                                 <th id="marca">Marca <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></i></th>
@@ -97,14 +120,34 @@
                             <c:set var="contador" value="0"/>
                             <c:forEach var="producto" items="${productos}">
 
-                                <c:if test="${producto.categoria==param.op||(param.buscar!=null&&(fn:contains(fn:toLowerCase(producto.denominacion), fn:toLowerCase(param.palabra))||fn:contains(fn:toLowerCase(producto.categoria), fn:toLowerCase(param.palabra))))}">
+                                <c:if test="${param.opcion=='all'||producto.oferta==param.opcion||producto.categoria==param.cat||(param.palabra!=null&&(fn:contains(fn:toLowerCase(producto.denominacion), fn:toLowerCase(param.palabra))||fn:contains(fn:toLowerCase(producto.categoria), fn:toLowerCase(param.palabra))))}">
                                     <c:set var="contador" value="${contador+1}"/>
                                     <tr id="fila">
                                         <td> 
-                                            <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}">
-                                                <div style="min-height:250px; min-width:250px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
-                                                </div>
-                                            </a>
+                                            <c:if test="${param.opcion=='all'}">
+                                                <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=all">
+                                                    <div style="min-height:250px; min-width:250px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                    </div>
+                                                </a>
+                                            </c:if>
+                                            <c:if test="${param.opcion=='s'}">
+                                                <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=s">
+                                                    <div style="min-height:250px; min-width:250px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                    </div>
+                                                </a>
+                                            </c:if>
+                                            <c:if test="${param.palabra!=null}">
+                                                <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&palabra=${param.palabra}">
+                                                    <div style="min-height:250px; min-width:250px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                    </div>
+                                                </a> 
+                                            </c:if>
+                                            <c:if test="${param.cat!=null}">
+                                                <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&cat=${param.cat}">
+                                                    <div style="min-height:250px; min-width:250px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                    </div>
+                                                </a>
+                                            </c:if> 
                                         </td>
                                         <td><c:out value="${producto.denominacion}"/></td>
                                         <td><c:out value="${producto.marca}"/></td>
@@ -194,35 +237,7 @@
                 sortTable(tres, n);
                 pagination(5);
             });
-            
 
-
-
-            //funciones para buscar en la tabla
-            document.querySelector("#buscar").onkeyup = function () {
-                $TableFilter("#tabla", this.value);
-            }
-
-            $TableFilter = function (id, value) {
-                var rows = document.querySelectorAll(id + ' tbody tr');
-
-                for (var i = 0; i < rows.length; i++) {
-                    var showRow = false;
-
-                    var row = rows[i];
-                    row.style.display = 'none';
-
-                    for (var x = 0; x < row.childElementCount; x++) {
-                        if (row.children[x].textContent.toLowerCase().indexOf(value.toLowerCase().trim()) > -1) {
-                            showRow = true;
-                            break;
-                        }
-                    }                    
-                    if (showRow) {
-                        row.style.display = null;
-                    }
-                }               
-            }
         </script>        
     </body>
 </html>

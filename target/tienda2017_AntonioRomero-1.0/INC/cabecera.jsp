@@ -20,7 +20,7 @@
                     <div class="buscador input-group">
                         <input type="text" name="palabra" class="form-control">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" name="buscar" value="buscar" type="submit">Search</button>
+                            <button class="btn btn-default" name="buscar" value="buscar" type="submit">Buscar</button>
                         </span>
                     </div>
                 </form>
@@ -34,7 +34,7 @@
                                 <div id="log-fail" style="height:2rem;"></div>
                                 <div class="input-group user">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input id="user-log" type="text" class="form-control" name="user-log" value="" placeholder="Username">                                        
+                                    <input id="email-log" type="text" class="form-control" name="email-log" value="" placeholder="Email">                                        
                                 </div>
                                 <div class="input-group pass">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -44,7 +44,7 @@
                             </div>  
                         </div>
                         <div class="registro">
-                            <a href="#" data-toggle="modal" data-target="#login-modal" style="color:white;">Check in</a>                            
+                            <a href="#" data-toggle="modal" data-target="#login-modal" style="color:white;">Registrarse</a>                            
                         </div>                       
                     </div>                   
                 </c:if>                
@@ -52,7 +52,7 @@
                     <div class="carrito-perfil pull-right text-center">
                         <div class="enlace-perfil col-sm-10">
                             <ul class="text-left">
-                                <li><i class="fa fa-address-card" aria-hidden="true"></i> <a href="#"><c:out value="Perfil de: ${login.userName}"/></a><li>
+                                <li><i class="fa fa-address-card" aria-hidden="true"></i> <a href="${contexto}/JSP/perfilCliente.jsp"><c:out value="${login.email}"/></a><li>
                                 <li><i class="fa fa-window-close" aria-hidden="true"></i> <a id="cerrar-sesion" href="${contexto}/CerrarSesion">Cerrar sesión</a></li>
                             </ul>
                         </div>
@@ -64,11 +64,11 @@
                     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog">
                             <div class="loginmodal-container">
-                                <h1>Create Your Account</h1><br>
+                                <h1>Crea tu cuenta</h1><br>
                                 <div id="resultado"></div>
-                                <input id="user-reg" type="text" name="user-reg" placeholder="Username" required>
+                                <input id="email-reg" type="text" name="email-reg" placeholder="Email" required>
                                 <input id="pass-reg" type="password" name="pass-reg" placeholder="Password" required>
-                                <input id="reg" type="button" name="input-reg" class="login loginmodal-submit" value="Sign in"/>
+                                <input id="reg" type="button" name="input-reg" class="login loginmodal-submit" value="Registrarme"/>
                             </div>
                         </div>
                     </div>
@@ -79,34 +79,40 @@
     <script>
         $(document).ready(function() {
                 $('#reg').click(function(event) {
-                        var user = $('#user-reg').val();
+                        var email = $('#email-reg').val();
                         var pass = $('#pass-reg').val();
-                        $.post('Registro', {
-				user : user,
+                        $.post('${contexto}/Registro', {                           
+				email : email,
 				pass: pass
 			}, function(responseText) {
                             if(responseText == 'SUCCESS'){
                                 $('.loginmodal-container input').hide();
                                 $('#resultado').hide();
-                                $('.loginmodal-container h1').text("Bienvenido "+user);
-                                $('.loginmodal-container h1').append("<input type='button' class='loginmodal-submit aceptar-bienvenida' value='Aceptar' style='margin-top: 2rem;'/>");
-                                $('.aceptar-bienvenida').click(function(){
+                                $('.loginmodal-container h1').text("Bienvenido");
+                                $('.loginmodal-container h1').append("<input type='button' class='loginmodal-submit registrarse1' value='Registrarme ahora' style='margin-top: 2rem;'/>");
+                                $('.loginmodal-container h1').append("<input type='button' class='loginmodal-submit registrarse2' value='Registrarme más adelante' style='margin-top: 2rem;'/>");
+                                $('.registrarse2').click(function(){
                                     location.reload();
                                 });
+                                $('.registrarse1').click(function(){
+                                    location.href="${contexto}/JSP/perfilCliente.jsp";
+                                });
                             }else if(responseText == 'FAILURE'){
-                            $('#resultado').html("<font color='red'>Username incorrecto</font>");
+                            $('#resultado').html("<font color='red'>Email no válido</font>");
+                            }else if(responseText == 'INCOMPLETE'){
+                            $('#resultado').html("<font color='red'>Rellene los campos</font>");    
                             }
-			});
+			}); 
                 });
         });
     </script>
     <script>
         $(document).ready(function() {
                 $('#log').click(function(event) {
-                    var user = $('#user-log').val();
+                    var email = $('#email-log').val();
                     var pass = $('#pass-log').val();
-                   $.post('Login', {
-                            user : user,
+                   $.post('${contexto}/Login', {
+                            email : email,
                             pass: pass
 			}, function(responseText) {
                             if(responseText == 'SUCCESS'){

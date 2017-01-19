@@ -21,15 +21,15 @@ public class UsuariosDAO implements IUsuariosDAO {
     ConnectionFactory conexion = null;
 
     @Override
-    public Usuarios getUsuarios(String UserName) {
+    public Usuarios getUsuarios(String Email) {
         Usuarios usuario=null;
         try {
             sentencia = conexion.getConnection().createStatement();
-            resultado = sentencia.executeQuery("select * from usuarios where UserName='"+UserName+"'");
+            resultado = sentencia.executeQuery("select * from usuarios where Email='"+Email+"'");
             if(resultado.next()){
               usuario=new Usuarios();
               usuario.setIdUsuario(resultado.getInt("IdUsuario"));
-              usuario.setUserName(resultado.getString("UserName"));
+              usuario.setEmail(resultado.getString("Email"));
               usuario.setClave(resultado.getString("Clave"));
               usuario.setUltimoAcceso(resultado.getTimestamp("UltimoAcceso"));
             }
@@ -42,12 +42,12 @@ public class UsuariosDAO implements IUsuariosDAO {
         }
 
     @Override
-    public String insertUsuario(String UserName, String Password) {
+    public String insertUsuario(String Email, String Password) {
         String mensaje = null;
         try {
             sentencia = conexion.getConnection().createStatement();
-            sentencia.executeUpdate("insert into Usuarios (UserName,Clave,UltimoAcceso,Tipo) values "
-                    + "('"+UserName+"','"+Password+"',now(),'u')");
+            sentencia.executeUpdate("insert into Usuarios (Email,Clave,UltimoAcceso,Tipo) values "
+                    + "('"+Email+"','"+Password+"',now(),'u')");
                 mensaje = "SUCCESS";
             } catch (SQLException e) {
                 mensaje = "FAILURE";
