@@ -26,8 +26,9 @@
                     <div class="cuerpo-perfil col-sm-12 col-xs-12">
                         <div class="menu-perfil col-sm-4 col-xs-12">
                             <ul>
-                                <li><a href="${contexto}/JSP/registroCliente.jsp">Actualizar mis datos</a></li>
+                                <li><a href="">Actualizar mis datos</a></li>
                                 <li><a href="">Consultar mis compras</a></li>
+                                <li><a href="">Cambiar mi contraseña</a></li>
                             </ul>
                         </div>
                         <div class="info-perfil col-sm-8 col-xs-12">
@@ -37,6 +38,19 @@
                                 <li>Apellidos: <c:out value="${cliente.apellidos}"/></li>
                                 <li>NIF: <c:out value="${cliente.NIF}"/></li>
                                 <li>Fecha de nacimiento: <c:out value="${cliente.fechaNacimiento}"/></li>
+                                <li>
+                                    Direcciones de envío:
+                                    <ul>
+                                        <c:forEach var="direccion" items="${cliente.direcciones}">
+                                            <li><c:out value="${direccion.nombreDireccion}"/> 
+                                                <c:out value="${direccion.direccion}"/> 
+                                                <c:out value="${direccion.localidad}"/> 
+                                                <c:out value="${direccion.provincia}"/> 
+                                                <c:out value="${direccion.codigoPostal}"/>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>

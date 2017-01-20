@@ -222,15 +222,16 @@ body{
     color: white;
     padding: 1rem 2rem;
 }
-.btn-comprar a{
+.btn-comprar button{
     text-decoration: none;
     color: white;
+    border: none;
     border-radius: 5px;
     background-color: #116357;   
     padding: 1rem 2rem;
     box-shadow: 2px 2px 3px rgba(0,0,0,0.5); 
 }
-.btn-comprar a:hover {
+.btn-comprar button:hover {
     background-color: #259a89;
 }
 .btn-comprar{
@@ -256,7 +257,7 @@ body{
 }
 .menu-perfil li{
     text-align: center;
-    padding: 2rem 3rem 2rem 0;
+    padding: 1rem 3rem 1rem 0;
 }
 .menu-perfil a{
     font-size: 16px;
@@ -287,6 +288,29 @@ body{
     margin-bottom: 6rem;
 }
 
+
+
+/*carrito*/
+.cuerpo-carrito{
+   background-color: white; 
+   box-shadow: 2px 2px 3px rgba(36,153,136,0.6);
+}
+.cuerpo-carrito{
+    color: #118674;
+}
+.cuerpo-carrito table{
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    width: 60%;
+    margin-left: 20%;
+}
+.cuerpo-carrito td{
+    padding: 2rem;
+    text-align: center;
+}
+.cuerpo-carrito tr{
+    border: 1px solid #90c7bf;
+}
 
 
 

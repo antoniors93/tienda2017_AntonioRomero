@@ -70,24 +70,9 @@
                             </div>
                             <div class="btn-comprar text-center">
                                 <c:if test="${login!=null}">
-                                    <a class="enlace-btn-comprar" href="#">Añadir al carrito</a>
+                                    <button id="añadir-producto" class="enlace-btn-comprar">Añadir al carrito</button>
                                 </c:if>
                             </div>
-                                    <c:if test="${cliente==null}">      
-                            <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h3 class="text-center">Informe</h3>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h4 class="text-center">Registrese en su perfil para realizar compras, por favor.</h4>   
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </c:if>
                         </div>
                         <div class="prod-info col-xs-12 col-sm-6" >
                             <h3 class="titulo-prod-info"><c:out value="${producto.denominacion}"/></h3>
@@ -106,13 +91,21 @@
             </div>
         </div>
         <jsp:include page="../INC/pie.jsp"></jsp:include>                        
-        <script>
-            $(".enlace-btn-comprar").click(function () {
-                $("#mostrarmodal").modal("show");
-            });
-            
+        <script>            
             $(".carousel-indicators li:first").addClass("active");
             $(".carousel-inner .item:first").addClass("active");
         </script>
+        <script>
+        $(document).ready(function() {
+                $('#añadir-producto').click(function(event) {
+                    var idProducto = ${producto.idProducto};
+                   $.post('${contexto}/Compra', {
+                            idProducto : idProducto
+			}, function(responseText) {
+                            $('.numero-carrito').text(responseText);
+			});
+                });
+        });
+    </script>
     </body>
 </html>

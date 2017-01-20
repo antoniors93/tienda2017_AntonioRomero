@@ -126,25 +126,25 @@
                                         <td> 
                                             <c:if test="${param.opcion=='all'}">
                                                 <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=all">
-                                                    <div style="min-height:250px; min-width:250px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                    <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
                                                     </div>
                                                 </a>
                                             </c:if>
                                             <c:if test="${param.opcion=='s'}">
                                                 <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=s">
-                                                    <div style="min-height:250px; min-width:250px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                    <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
                                                     </div>
                                                 </a>
                                             </c:if>
                                             <c:if test="${param.palabra!=null}">
                                                 <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&palabra=${param.palabra}">
-                                                    <div style="min-height:250px; min-width:250px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                    <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
                                                     </div>
                                                 </a> 
                                             </c:if>
                                             <c:if test="${param.cat!=null}">
                                                 <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&cat=${param.cat}">
-                                                    <div style="min-height:250px; min-width:250px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                    <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
                                                     </div>
                                                 </a>
                                             </c:if> 

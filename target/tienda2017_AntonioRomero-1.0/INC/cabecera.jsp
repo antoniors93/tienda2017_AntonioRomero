@@ -57,7 +57,7 @@
                             </ul>
                         </div>
                         <div class="enlace-carrito col-sm-2">
-                            <a href="#"><i class="fa fa-shopping-cart fa-3x" aria-hidden="true"><div class="fa" style="font-size: 26px;"></div></i></a>
+                            <a href="${contexto}/JSP/carrito.jsp"><i class="fa fa-shopping-cart fa-3x" aria-hidden="true"><div class="fa numero-carrito" style="font-size: 26px;">${pedido.lineasPedido.size()}</div></i></a>
                         </div>
                     </div>
                 </c:if>

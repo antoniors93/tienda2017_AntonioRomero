@@ -7,6 +7,7 @@ package es.albarregas.beans;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,6 +20,15 @@ public class Clientes implements Serializable{
     private String Apellidos;
     private String NIF;
     private Date FechaNacimiento;
+    private ArrayList<Direcciones> direcciones;
+
+    public ArrayList<Direcciones> getDirecciones() {
+        return direcciones;
+    }
+
+    public void setDirecciones(ArrayList<Direcciones> direcciones) {
+        this.direcciones = direcciones;
+    }
 
     public int getIdCliente() {
         return IdCliente;

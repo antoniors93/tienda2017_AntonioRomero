@@ -6,8 +6,11 @@
 package es.albarregas.Controllers;
 
 import es.albarregas.DAO.IClientesDAO;
+import es.albarregas.DAO.ILineasPedidoDAO;
+import es.albarregas.DAO.IPedidosDAO;
 import es.albarregas.DAO.IUsuariosDAO;
 import es.albarregas.beans.Clientes;
+import es.albarregas.beans.Pedido;
 import es.albarregas.beans.Usuarios;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
@@ -42,6 +45,8 @@ public class Login extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IUsuariosDAO usr = daof.getUsuarios();
+            IPedidosDAO pedidoDao = daof.getPedidos();
+            ILineasPedidoDAO lineasPedidoDao = daof.getLineasPedidos();
             Usuarios usuario = usr.getUsuarios(request.getParameter("email"));
 
             String mensaje = "";
@@ -50,9 +55,16 @@ public class Login extends HttpServlet {
             } else if (usuario.getClave().equals(request.getParameter("pass"))) {
                 IClientesDAO client = daof.getClientes();
                 Clientes cliente=client.getCliente(usuario.getIdUsuario());
+                Pedido pedido=pedidoDao.getPedido(usuario.getIdUsuario());
+                
+              
                 HttpSession sesion = request.getSession(true);               
                 sesion.setAttribute("cliente", cliente);            
                 sesion.setAttribute("login", usuario);
+                if(pedido!=null){
+                    pedido.setLineasPedido(lineasPedidoDao.getLineasPedido(pedido.getIdPedido()));
+                    sesion.setAttribute("pedido", pedido);
+                }               
                 mensaje = "SUCCESS";
             } else {
                 mensaje = "FAILURE";
