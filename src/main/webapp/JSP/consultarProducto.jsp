@@ -40,8 +40,12 @@
                         </ul>
                     </div>
                     <div class="cuerpo-prod col-xs-12 col-sm-12">                       
-                        <div class="col-xs-12 col-sm-6" >
-
+                        <div class="col-xs-12 col-sm-6" >                            
+                            <div class="btn-comprar text-center">
+                                <c:if test="${login!=null}">
+                                    <button id="añadir-producto" class="enlace-btn-comprar">Añadir al carrito</button>
+                                </c:if>
+                            </div>                            
                             <div id="carousel-example-generic" class="carousel slide text-center carousel-prod" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                     <c:set var="contador" value="0"/>
@@ -67,12 +71,7 @@
                                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
-                            </div>
-                            <div class="btn-comprar text-center">
-                                <c:if test="${login!=null}">
-                                    <button id="añadir-producto" class="enlace-btn-comprar">Añadir al carrito</button>
-                                </c:if>
-                            </div>
+                            </div>                            
                         </div>
                         <div class="prod-info col-xs-12 col-sm-6" >
                             <h3 class="titulo-prod-info"><c:out value="${producto.denominacion}"/></h3>
@@ -84,7 +83,24 @@
                                     <li><c:out value="${caract.nombre}"/>: <c:out value="${caract.descripcion}"/></li>
                                     </c:forEach>
                             </ul>
+                            <p>Unidades disponibles: <c:out value="${producto.stock}"/></p>
                             <p class="precio"><c:out value="${producto.precioUnitario} €"/></p>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h3>Producto no disponible</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <h4 style="color:black">Sentimos las molestias, no tenemos unidades de este producto actualmente.</h4>   
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" data-dismiss="modal" class="btn btn-default">Cerrar</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,12 +114,16 @@
         <script>
         $(document).ready(function() {
                 $('#añadir-producto').click(function(event) {
+                    if(${producto.stock==0}){
+                        $("#mostrarmodal").modal("show");
+                    }else{
                     var idProducto = ${producto.idProducto};
                    $.post('${contexto}/Compra', {
-                            idProducto : idProducto
+                            idProducto : idProducto,
 			}, function(responseText) {
                             $('.numero-carrito').text(responseText);
 			});
+                    }
                 });
         });
     </script>

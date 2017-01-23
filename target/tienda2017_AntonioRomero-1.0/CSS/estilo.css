@@ -144,12 +144,16 @@ body{
     text-decoration: none;
 }
 .cabecera-tabla-productos{
-    padding-bottom: 12rem;
+    padding-bottom: 6rem;
     color: #118674;
 }
 .num_registros_pagina{
     padding-left: 0;
     color: #168b86;
+}
+.cuerpo-tabla-prods {
+    overflow-y: scroll;
+    overflow-y: hidden;
 }
 .registros_pagina{
     width: 100px;
@@ -173,7 +177,6 @@ body{
     text-align: center;
 }
 .tabla-productos td{
-    color: #118674;
     width: 14%;
 }
 .tabla-productos td:nth-child(1), .tabla-productos td:nth-child(2){
@@ -197,7 +200,7 @@ body{
 }
 .carousel-prod{
     margin-top: 3rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     width: 100%;
     background-color: white;
     box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
@@ -223,7 +226,6 @@ body{
     padding: 1rem 2rem;
 }
 .btn-comprar button{
-    text-decoration: none;
     color: white;
     border: none;
     border-radius: 5px;
@@ -264,19 +266,27 @@ body{
     text-decoration: none;
     color: white;
 }
+.menu-perfil{
+    margin-top: 4rem;
+}
+.menu-perfil ul{ 
+    width: 80%;
+    margin: 0 auto;
+}
 .menu-perfil a:hover{
     color: #7be2d0;
 }
-.info-perfil{
+.info-perfil h2, .info-perfil i{
     color: #118674; 
 }
-.info-perfil h2{
-    text-align: center;
+.info-perfil i{
+    padding-top: 4rem;
 }
 .info-perfil label{
     font-weight: normal;
 }
 .info-perfil ul{
+    padding-left: 0;
     list-style: none;
     font-size: 16px;
 }
@@ -290,12 +300,59 @@ body{
 
 
 
+/*actualizar cliente*/
+.lista-datos-pers, .lista-datos-direccion{
+    margin-top: 2rem;
+}
+.lista-update-datos label{
+    display: block;
+}
+.lista-update-datos li{
+    width: 70%;
+    margin: 0 auto;  
+}
+.lista-update-datos input{
+    width: 100%;
+}
+.lista-update-datos{
+    padding-left: 0;
+}
+.btn-update-cliente{
+    margin-bottom: 3rem;
+}
+.btn-update-cliente input{
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background-color: #116357;   
+    padding: 1rem 2rem;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.5); 
+}
+.localizacion{
+    margin-bottom: 4rem;
+    margin-left: 12%;
+}
+.localizacion select{
+    font-size: 14px;
+    width: 200px;
+    display: block;
+}
+.localizacion input{
+    margin-left: 1rem;
+    width: 100px;
+}
+
+
+
+
 /*carrito*/
 .cuerpo-carrito{
    background-color: white; 
    box-shadow: 2px 2px 3px rgba(36,153,136,0.6);
+   overflow-y: scroll;
+   overflow-y: hidden;
 }
-.cuerpo-carrito{
+.cuerpo-carrito h2, th{
     color: #118674;
 }
 .cuerpo-carrito table{
@@ -309,8 +366,24 @@ body{
     text-align: center;
 }
 .cuerpo-carrito tr{
-    border: 1px solid #90c7bf;
+    border: 1px solid #c6c6c6;
 }
+.botones-carrito{
+    margin-bottom: 4rem;
+}
+.botones-carrito a{
+    text-decoration: none;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background-color: #116357;   
+    padding: 1rem 2rem;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.5); 
+}
+.botones-carrito a:hover {
+    background-color: #259a89;
+}
+
 
 
 

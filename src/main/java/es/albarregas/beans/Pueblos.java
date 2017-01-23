@@ -11,18 +11,8 @@ package es.albarregas.beans;
  */
 public class Pueblos {
     
-    private int IdPueblo;
     private int IdProvincia;
-    private String CodigoPostal;
     private String NombrePueblo;
-
-    public int getIdPueblo() {
-        return IdPueblo;
-    }
-
-    public void setIdPueblo(int IdPueblo) {
-        this.IdPueblo = IdPueblo;
-    }
 
     public int getIdProvincia() {
         return IdProvincia;
@@ -30,14 +20,6 @@ public class Pueblos {
 
     public void setIdProvincia(int IdProvincia) {
         this.IdProvincia = IdProvincia;
-    }
-
-    public String getCodigoPostal() {
-        return CodigoPostal;
-    }
-
-    public void setCodigoPostal(String CodigoPostal) {
-        this.CodigoPostal = CodigoPostal;
     }
 
     public String getNombrePueblo() {

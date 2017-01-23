@@ -26,7 +26,7 @@ public class LineasPedidoDAO implements ILineasPedidoDAO{
         try {
             sentencia = conexion.getConnection().createStatement();
             sentencia.executeUpdate("insert into LineasPedidos (IdPedido,NumeroLinea,IdProducto,Cantidad) values "
-                    + "("+lineapedido.getIdPedido()+","+lineapedido.getNumeroLinea()+","+lineapedido.getIdProducto()+",1)");
+                    + "("+lineapedido.getIdPedido()+","+lineapedido.getNumeroLinea()+","+lineapedido.getIdProducto()+","+lineapedido.getCantidad()+")");
             } catch (SQLException e) {
             System.out.println("Problemas al visualizar");
             e.printStackTrace();
@@ -55,6 +55,30 @@ public class LineasPedidoDAO implements ILineasPedidoDAO{
             }
         ConnectionFactory.closeConnection();
         return lineasPedido;
+    }
+
+    @Override
+    public void deleteLineaPedido(Integer IdPedido, Integer NumeroLinea) {
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("delete from LineasPedidos where IdPedido="+IdPedido+" and NumeroLinea="+NumeroLinea);
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    public void updateLineaPedido(Integer IdPedido, Integer NumeroLinea, Integer cantidad) {
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("update LineasPedidos set cantidad="+cantidad+" where IdPedido="+IdPedido+" and NumeroLinea="+NumeroLinea);
+        } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+        }
+        ConnectionFactory.closeConnection();
     }
     
 }

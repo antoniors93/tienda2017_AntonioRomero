@@ -15,9 +15,27 @@ public class Direcciones {
     private int IdCliente;
     private String NombreDireccion;
     private String Direccion;
+    private String Telefono;
     private String CodigoPostal;
     private String Localidad;
+    private int IdPueblo;
     private String Provincia;
+
+    public String getTelefono() {
+        return Telefono;
+    }
+
+    public void setTelefono(String Telefono) {
+        this.Telefono = Telefono;
+    }
+
+    public int getIdPueblo() {
+        return IdPueblo;
+    }
+
+    public void setIdPueblo(int IdPueblo) {
+        this.IdPueblo = IdPueblo;
+    }
 
     public int getIdDireccion() {
         return IdDireccion;

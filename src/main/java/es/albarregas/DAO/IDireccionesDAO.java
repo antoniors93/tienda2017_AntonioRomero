@@ -5,10 +5,13 @@
  */
 package es.albarregas.DAO;
 
+import es.albarregas.beans.Direcciones;
+
 /**
  *
  * @author Antonio
  */
-public class IDireccionesDAO {
+public interface IDireccionesDAO{
     
+    public void insertarDireccion(Direcciones direccion);
 }

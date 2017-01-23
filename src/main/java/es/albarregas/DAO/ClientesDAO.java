@@ -56,5 +56,18 @@ public class ClientesDAO implements IClientesDAO{
             }
         ConnectionFactory.closeConnection();
     }
+
+    @Override
+    public void updateCliente(Clientes cliente) {
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("update clientes set Nombre='"+cliente.getNombre()+"', Apellidos='"+cliente.getApellidos()+"', "
+                    +"NIF='"+cliente.getNIF()+"', FechaNacimiento='"+cliente.getFechaNacimiento()+"' where IdCliente="+cliente.getIdCliente());
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+    }
     
 }

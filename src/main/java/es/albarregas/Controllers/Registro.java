@@ -46,17 +46,21 @@ public class Registro extends HttpServlet {
             IClientesDAO clientDao = daof.getClientes();
             String mensaje="INCOMPLETE"; 
             
-            if(request.getParameter("email")!=""&&request.getParameter("pass")!=""){
+            if(request.getParameter("email")!=""&&request.getParameter("pass")!=""){ // si hay campos vacios devolvemos el mensaje INCOMPLETE
                 if(request.getParameter("email").matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")){
+                    //si el email es valido lo insertamos en la base de datos y recibimos una respuesta(SUCCESS o FAILURE) que almacenamos en mensaje
                     mensaje=usersDao.insertUsuario(request.getParameter("email"), request.getParameter("pass"));                   
-                }else{
-                    mensaje="FAILURE";
+                }else{//si el email no es valido devolvemos un mensaje
+                    mensaje="FORMAT";
                 }
             
-            if(mensaje.equalsIgnoreCase("SUCCESS")){
+            if(mensaje.equalsIgnoreCase("SUCCESS")){ //si la insercion ha sido correcta(si la insercion ha fallado devolvemos el mensaje FAILURE)
+                //obtenemos el usuario
                 Usuarios usuario=usersDao.getUsuarios(request.getParameter("email"));
+                //creamos un cliente (vacio) y lo obtenemos
                 clientDao.insertCliente(usuario.getIdUsuario());
                 Clientes cliente=clientDao.getCliente(usuario.getIdUsuario());
+                //almacenamos cliente y usuario en sesion
                 HttpSession sesion= request.getSession(true);
                 sesion.setAttribute("login", usuario);
                 sesion.setAttribute("cliente", cliente);

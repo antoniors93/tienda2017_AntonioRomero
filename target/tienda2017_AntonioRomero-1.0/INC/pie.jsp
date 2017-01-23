@@ -10,10 +10,7 @@
 <footer>
     <div class="pie container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-sm-3">
-                <img class="img-responsive logo" src="${contexto}/IMG/logo.png"/>
-            </div>
-            <div class="info-pie text-center col-xs-12 col-sm-9">
+            <div class="info-pie text-center col-xs-12 col-sm-12">
                 <div class="col-xs-12 col-sm-4">
                     <h4>Quiénes somos</h4>
                     <a href="#">Nuestra tienda</a>

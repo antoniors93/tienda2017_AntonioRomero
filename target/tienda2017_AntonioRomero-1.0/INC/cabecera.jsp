@@ -10,11 +10,11 @@
 <header>
     <div class="cabecera container-fluid">
         <div class="row">
-
+            <!--logo-->
             <div class="col-xs-12 col-sm-3">
                 <a href="${contexto}/"><img class="img-responsive logo" src="${contexto}/IMG/logo.png"/></a>
             </div>
-
+            <!--buscador-->
             <div class="col-xs-12 col-sm-offset-1 col-sm-4">
                 <form action="${contexto}/JSP/mostrarProductos.jsp" method="post">
                     <div class="buscador input-group">
@@ -25,7 +25,7 @@
                     </div>
                 </form>
             </div>
-
+            <!--login y registro-->
             <div class="col-xs-12 col-sm-4">
                 <c:if test="${login==null}">
                     <div class="log-registro pull-right text-center">                        
@@ -47,8 +47,9 @@
                             <a href="#" data-toggle="modal" data-target="#login-modal" style="color:white;">Registrarse</a>                            
                         </div>                       
                     </div>                   
-                </c:if>                
-                <c:if test="${login!=null}">
+                </c:if>
+                <!-- carrito, perfil y cerrar sesion una vez logueado-->                
+                <c:if test="${login!=null}"> 
                     <div class="carrito-perfil pull-right text-center">
                         <div class="enlace-perfil col-sm-10">
                             <ul class="text-left">
@@ -61,6 +62,7 @@
                         </div>
                     </div>
                 </c:if>
+                <!--modal que aparece cuando deseas registrarte-->
                     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog">
                             <div class="loginmodal-container">
@@ -76,6 +78,7 @@
             </div>
         </div>
 </header>
+    <!--Script que comprueba el registro con ajax a traves del servlet Registro-->
     <script>
         $(document).ready(function() {
                 $('#reg').click(function(event) {
@@ -95,18 +98,30 @@
                                     location.reload();
                                 });
                                 $('.registrarse1').click(function(){
-                                    location.href="${contexto}/JSP/perfilCliente.jsp";
+                                    location.href="${contexto}/JSP/actualizarCliente.jsp";
                                 });
                             }else if(responseText == 'FAILURE'){
-                            $('#resultado').html("<font color='red'>Email no válido</font>");
+                            $('#resultado').html("");
+                                setTimeout(function(){
+                                    $('#resultado').html("<font color='red'>Email registrado</font>");
+                                }, 200);                               
                             }else if(responseText == 'INCOMPLETE'){
-                            $('#resultado').html("<font color='red'>Rellene los campos</font>");    
+                            $('#resultado').html("");
+                                setTimeout(function(){
+                                    $('#resultado').html("<font color='red'>Rellene los campos</font>"); 
+                                }, 200);                               
+                            }else if(responseText == 'FORMAT'){
+                            $('#resultado').html("");
+                                setTimeout(function(){
+                                    $('#resultado').html("<font color='red'>Email incorrecto</font>"); 
+                                }, 200);                               
                             }
 			}); 
                 });
         });
     </script>
-    <script>
+    <!--Script que comprueba el login con ajax a traves del servlet Login-->
+    <script> 
         $(document).ready(function() {
                 $('#log').click(function(event) {
                     var email = $('#email-log').val();
@@ -118,7 +133,10 @@
                             if(responseText == 'SUCCESS'){
                                     location.reload();
                             }else if(responseText == 'FAILURE'){
-                            $('#log-fail').html("<font color='red'>Login incorrecto</font>");
+                            $('#log-fail').html("");
+                                setTimeout(function(){
+                                    $('#log-fail').html("<font color='red'>Login incorrecto</font>");
+                                }, 200);                           
                             }
 			});
                 });

@@ -14,4 +14,5 @@ import es.albarregas.beans.Clientes;
 public interface IClientesDAO {
     public Clientes getCliente(Integer IdCliente);
     public void insertCliente(Integer IdCliente);
+    public void updateCliente(Clientes cliente);
 }

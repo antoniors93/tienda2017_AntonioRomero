@@ -65,7 +65,7 @@
                     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
                         <div class="div-breadcrumb col-xs-12 col-sm-12">
                             <ul class="breadcrumb col-sm-6">
-                            <li><a href="${contexto}/">Inicio</a></li>
+                                <li><a href="${contexto}/">Inicio</a></li>
                             <li class="active">
                                 <c:if test="${param.opcion=='all'}">
                                     <c:out value="Catálogo de productos"/>
@@ -82,90 +82,94 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="cabecera-tabla-productos">
-                        <div class="num_registros_pagina col-sm-2 col-xs-6">
-                            <p>Nº de registros</p>
-                            <select class="form-control registros_pagina btn btn-default" onchange="pagination(value);">
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="50">50</option>
-                            </select>
+                    <div class="cuerpo-tabla-prods col-sm-12 col-xs-12">
+                        <div class="cabecera-tabla-productos">
+                            <div class="num_registros_pagina col-sm-2 col-xs-6">
+                                <p>Nº de registros</p>
+                                <select class="form-control registros_pagina btn btn-default" onchange="pagination(value);">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+                            <h2 class="titulo-tabla-productos text-center col-sm-8 col-xs-6">
+                                <c:if test="${param.opcion=='all'}">
+                                    <c:out value="Catálogo de productos"/>
+                                </c:if>
+                                <c:if test="${param.opcion=='s'}">
+                                    <c:out value="Productos en oferta"/>
+                                </c:if>
+                                <c:if test="${param.palabra!=null}">
+                                    <c:out value='"${param.palabra}"'/> 
+                                </c:if>
+                                <c:out value="${param.cat}"/>
+                            </h2>
+                            <p class="visible-xs text-center" style="font-size: 1.3rem">Scroll <i class="fa fa-arrows-h"></i></p>
                         </div>
-                        <h2 class="titulo-tabla-productos text-center col-sm-8 col-xs-6">
-                            <c:if test="${param.opcion=='all'}">
-                                <c:out value="Catálogo de productos"/>
-                            </c:if>
-                            <c:if test="${param.opcion=='s'}">
-                                <c:out value="Productos en oferta"/>
-                            </c:if>
-                            <c:if test="${param.palabra!=null}">
-                                <c:out value='"${param.palabra}"'/> 
-                            </c:if>
-                            <c:out value="${param.cat}"/>
-                        </h2>
-                    </div>
-                    <table id="tabla" class="tabla-productos">
-                        <thead>
-                            <tr>
-                                <th>
-                                </th>
-                                <th id="nombre">Producto <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></i></th>
-                                <th id="marca">Marca <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></i></th>
-                                <th id="precio">Precio/€ <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></i></th>
-                                <th>Disponibilidad</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cuerpo">
-                            <c:set var="contador" value="0"/>
-                            <c:forEach var="producto" items="${productos}">
 
-                                <c:if test="${param.opcion=='all'||producto.oferta==param.opcion||producto.categoria==param.cat||(param.palabra!=null&&(fn:contains(fn:toLowerCase(producto.denominacion), fn:toLowerCase(param.palabra))||fn:contains(fn:toLowerCase(producto.categoria), fn:toLowerCase(param.palabra))))}">
-                                    <c:set var="contador" value="${contador+1}"/>
-                                    <tr id="fila">
-                                        <td> 
-                                            <c:if test="${param.opcion=='all'}">
-                                                <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=all">
-                                                    <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
-                                                    </div>
-                                                </a>
-                                            </c:if>
-                                            <c:if test="${param.opcion=='s'}">
-                                                <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=s">
-                                                    <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
-                                                    </div>
-                                                </a>
-                                            </c:if>
-                                            <c:if test="${param.palabra!=null}">
-                                                <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&palabra=${param.palabra}">
-                                                    <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
-                                                    </div>
-                                                </a> 
-                                            </c:if>
-                                            <c:if test="${param.cat!=null}">
-                                                <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&cat=${param.cat}">
-                                                    <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
-                                                    </div>
-                                                </a>
-                                            </c:if> 
-                                        </td>
-                                        <td><c:out value="${producto.denominacion}"/></td>
-                                        <td><c:out value="${producto.marca}"/></td>
-                                        <td><c:out value="${producto.precioUnitario}"/></td>
-                                        <td><c:out value="${producto.stock}"/></td>
+                        <table id="tabla" class="tabla-productos">
+                            <thead>
+                                <tr>
+                                    <th>
+                                    </th>
+                                    <th id="nombre">Producto <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></i></th>
+                                    <th id="marca">Marca <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></i></th>
+                                    <th id="precio">Precio/€ <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></i></th>
+                                    <th>Disponibilidad</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpo">
+                                <c:set var="contador" value="0"/>
+                                <c:forEach var="producto" items="${productos}">
+
+                                    <c:if test="${param.opcion=='all'||producto.oferta==param.opcion||producto.categoria==param.cat||(param.palabra!=null&&(fn:contains(fn:toLowerCase(producto.denominacion), fn:toLowerCase(param.palabra))||fn:contains(fn:toLowerCase(producto.categoria), fn:toLowerCase(param.palabra))))}">
+                                        <c:set var="contador" value="${contador+1}"/>
+                                        <tr id="fila">
+                                            <td> 
+                                                <c:if test="${param.opcion=='all'}">
+                                                    <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=all">
+                                                        <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                        </div>
+                                                    </a>
+                                                </c:if>
+                                                <c:if test="${param.opcion=='s'}">
+                                                    <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=s">
+                                                        <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                        </div>
+                                                    </a>
+                                                </c:if>
+                                                <c:if test="${param.palabra!=null}">
+                                                    <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&palabra=${param.palabra}">
+                                                        <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                        </div>
+                                                    </a> 
+                                                </c:if>
+                                                <c:if test="${param.cat!=null}">
+                                                    <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&cat=${param.cat}">
+                                                        <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                        </div>
+                                                    </a>
+                                                </c:if> 
+                                            </td>
+                                            <td><c:out value="${producto.denominacion}"/></td>
+                                            <td><c:out value="${producto.marca}"/></td>
+                                            <td><c:out value="${producto.precioUnitario}"/></td>
+                                            <td><c:out value="${producto.stock}"/></td>
+                                        </tr>
+                                    </c:if>
+
+                                </c:forEach>
+                                <c:if test="${contador==0}">
+                                    <tr>
+                                        <td colspan="5">No hay productos disponibles</td>
                                     </tr>
                                 </c:if>
+                            </tbody>
+                        </table>
+                        <div class="pagination">
 
-                            </c:forEach>
-                            <c:if test="${contador==0}">
-                                <tr>
-                                    <td colspan="5">No hay productos disponibles</td>
-                                </tr>
-                            </c:if>
-                        </tbody>
-                    </table>
-                    <div class="pagination">
-
+                        </div>
                     </div>
                 </div>                           
             </div>
@@ -223,19 +227,19 @@
                 uno *= -1;
                 var n = $(this).prevAll().length;
                 sortTable(uno, n);
-                pagination(5);
+                pagination(10);
             });
             $("#marca").click(function () {
                 dos *= -1;
                 var n = $(this).prevAll().length;
                 sortTable(dos, n);
-                pagination(5);
+                pagination(10);
             });
             $("#precio").click(function () {
                 tres *= -1;
                 var n = $(this).prevAll().length;
                 sortTable(tres, n);
-                pagination(5);
+                pagination(10);
             });
 
         </script>        

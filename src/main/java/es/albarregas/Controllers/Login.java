@@ -47,21 +47,24 @@ public class Login extends HttpServlet {
             IUsuariosDAO usr = daof.getUsuarios();
             IPedidosDAO pedidoDao = daof.getPedidos();
             ILineasPedidoDAO lineasPedidoDao = daof.getLineasPedidos();
+            
             Usuarios usuario = usr.getUsuarios(request.getParameter("email"));
-
+            //buscamos el usuario con el email introducido
+            
             String mensaje = "";
-            if (usuario == null) {
+            if (usuario == null) { //si no se ha encontrado un usuario devolvemos un mensaje de error
                 mensaje = "FAILURE";
-            } else if (usuario.getClave().equals(request.getParameter("pass"))) {
+            } else if (usuario.getClave().equals(request.getParameter("pass"))) {//si hay campos vacios devolvemos un mensaje de error
                 IClientesDAO client = daof.getClientes();
-                Clientes cliente=client.getCliente(usuario.getIdUsuario());
-                Pedido pedido=pedidoDao.getPedido(usuario.getIdUsuario());
+                Clientes cliente=client.getCliente(usuario.getIdUsuario()); //obtenemos el cliente relacionado con ese usuario
+                Pedido pedido=pedidoDao.getPedido(usuario.getIdUsuario()); //optenemos el pedido del carrito de ese usuario
                 
               
-                HttpSession sesion = request.getSession(true);               
-                sesion.setAttribute("cliente", cliente);            
+                HttpSession sesion = request.getSession(true); //almacenamos usuario y cliente en sesion        
+                sesion.setAttribute("cliente", cliente);             
                 sesion.setAttribute("login", usuario);
-                if(pedido!=null){
+                
+                if(pedido!=null){ //si el usuario tiene algun pedido en el carrito le añadimos las lineas y lo guardamos en sesion
                     pedido.setLineasPedido(lineasPedidoDao.getLineasPedido(pedido.getIdPedido()));
                     sesion.setAttribute("pedido", pedido);
                 }               

@@ -62,7 +62,11 @@ public class Compra extends HttpServlet {
             
             lineaPedido.setIdPedido(pedido.getIdPedido());
             lineaPedido.setIdProducto(idProducto);
-            lineaPedido.setNumeroLinea(pedido.getLineasPedido().size()+1);
+            if(pedido.getLineasPedido().size()==0){
+                lineaPedido.setNumeroLinea(1);
+            }else{
+            lineaPedido.setNumeroLinea(pedido.getLineasPedido().get(pedido.getLineasPedido().size()-1).getNumeroLinea()+1);
+            }
             lineaPedido.setCantidad(1);
             lineaDao.insertLineaPedido(lineaPedido);
             pedido.getLineasPedido().add(lineaPedido);

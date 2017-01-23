@@ -24,15 +24,21 @@
                         </ul>
                     </div>
                     <div class="cuerpo-perfil col-sm-12 col-xs-12">
-                        <div class="menu-perfil col-sm-4 col-xs-12">
+                        <div class="menu-perfil col-sm-5 col-xs-12">
                             <ul>
-                                <li><a href="">Actualizar mis datos</a></li>
+                                <li><a href="${contexto}/JSP/actualizarCliente.jsp">Actualizar mis datos</a></li>
                                 <li><a href="">Consultar mis compras</a></li>
                                 <li><a href="">Cambiar mi contraseña</a></li>
                             </ul>
                         </div>
-                        <div class="info-perfil col-sm-8 col-xs-12">
-                            <h2>Información personal <i class="fa fa-user-circle fa-2x pull-right" aria-hidden="true"></i></h2>
+                        <div class="info-perfil col-sm-7 col-xs-12">
+                            <div class="col-sm-offset-2 col-sm-8 col-xs-12">
+                                <h2>Información personal</h2>
+                            </div>
+                            <div class="col-sm-2 col-xs-12 text-center">
+                                <i class="fa fa-user-circle fa-4x pull-right" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-sm-12 col-xs-12">
                             <ul>
                                 <li>Nombre: <c:out value="${cliente.nombre}"/></li>
                                 <li>Apellidos: <c:out value="${cliente.apellidos}"/></li>
@@ -40,7 +46,10 @@
                                 <li>Fecha de nacimiento: <c:out value="${cliente.fechaNacimiento}"/></li>
                                 <li>
                                     Direcciones de envío:
-                                    <ul>
+                                    <ul style="font-size: 14px;">
+                                        <c:if test="${cliente.direcciones==null}">
+                                            <li>No existen direcciones de envío</li>
+                                        </c:if>
                                         <c:forEach var="direccion" items="${cliente.direcciones}">
                                             <li><c:out value="${direccion.nombreDireccion}"/> 
                                                 <c:out value="${direccion.direccion}"/> 
@@ -52,6 +61,7 @@
                                     </ul>
                                 </li>
                             </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

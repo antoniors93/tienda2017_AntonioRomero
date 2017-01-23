@@ -51,5 +51,17 @@ public class PedidosDAO implements IPedidosDAO{
         ConnectionFactory.closeConnection();
         return pedido;
     }
+
+    @Override
+    public void deletePedido(Integer IdPedido) {
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("delete from pedidos where IdPedido="+IdPedido);
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+    }
     
 }
