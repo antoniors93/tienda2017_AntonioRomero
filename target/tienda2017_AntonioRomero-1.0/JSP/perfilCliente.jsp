@@ -46,16 +46,16 @@
                                 <li>Fecha de nacimiento: <c:out value="${cliente.fechaNacimiento}"/></li>
                                 <li>
                                     Direcciones de envío:
-                                    <ul style="font-size: 14px;">
+                                    <ul style="font-size: 14px; padding: 1rem 0 0 2rem;">
                                         <c:if test="${cliente.direcciones==null}">
                                             <li>No existen direcciones de envío</li>
                                         </c:if>
                                         <c:forEach var="direccion" items="${cliente.direcciones}">
                                             <li><c:out value="${direccion.nombreDireccion}"/> 
                                                 <c:out value="${direccion.direccion}"/> 
-                                                <c:out value="${direccion.localidad}"/> 
-                                                <c:out value="${direccion.provincia}"/> 
-                                                <c:out value="${direccion.codigoPostal}"/>
+                                                <c:out value="${direccion.localidad}"/>/<c:out value="${direccion.provincia}"/> 
+                                                <c:out value="${direccion.codigoPostal}"/> 
+                                                Tlf: <c:out value="${direccion.telefono}"/>
                                             </li>
                                         </c:forEach>
                                     </ul>

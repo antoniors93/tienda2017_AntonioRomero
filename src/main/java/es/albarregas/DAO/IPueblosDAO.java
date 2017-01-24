@@ -15,4 +15,6 @@ import java.util.ArrayList;
 public interface IPueblosDAO {
     
     public ArrayList<Pueblos> getPueblos(Integer IdProvincia);
+    public ArrayList<Pueblos> getCodigosPostales(String nombrePueblo);
+    public Pueblos getNombreCodigoPostal(Integer idPueblo);
 }

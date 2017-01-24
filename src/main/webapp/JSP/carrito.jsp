@@ -26,7 +26,7 @@
                     <div class="cuerpo-carrito col-sm-12 col-xs-12">
                         <h2 class="text-center">Carrito de la compra</h2>
                         <p class="visible-xs text-center" style="font-size: 1.3rem">Scroll <i class="fa fa-arrows-h"></i></p>
-                        <table>
+                        <table id="tabla">
                             <tr>
                                 <th>Producto</th>
                                 <th>Precio/€</th>
@@ -64,9 +64,25 @@
                                 </c:if>
                         </table>
                         <div class="botones-carrito text-center col-xs-12 col-sm-12">
-                            <a href="">Confirmar pedido</a>
-                            <a href="${contexto}/CerrarPedido?op=cancelar" >Cancelar pedido</a>
+                            <a href="${contexto}/FinalizarCompra?op=comprar">Confirmar pedido</a>
+                            <a id="cancelar-pedido" href="${contexto}/CerrarPedido?op=cancelar">Cancelar pedido</a>
                         </div>
+                        <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h3>Pedido cancelado</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <h4 style="color:black">No hay productos en el carrito.</h4>   
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" data-dismiss="modal" class="btn btn-default">Cerrar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -75,12 +91,18 @@
             <script> 
                 $(document).ready(function() {
                     $('.btn-eliminar').click(function(event) {
-                        $(this).parent().parent().hide();
+                        $(this).parent().parent().hide();                      
                         var numLinea = $(this).val();
                        $.post('${contexto}/OperacionesCarrito', {
                                 numLinea: numLinea                              
                             }, function(responseText) {
+                                if(responseText==0){                                
+                                    $('#tabla').append('<tr><td colspan="4">No hay productos añadidos</td></tr>');
+                                    $('.numero-carrito').text("");        
+                                    $("#mostrarmodal").modal("show");
+                                }else{
                                 $('.numero-carrito').text(responseText);
+                            }
                             });
                     });
                 });

@@ -6,15 +6,21 @@
 package es.albarregas.Controllers;
 
 import es.albarregas.DAO.IClientesDAO;
+import es.albarregas.DAO.IDireccionesDAO;
 import es.albarregas.DAO.ILineasPedidoDAO;
 import es.albarregas.DAO.IPedidosDAO;
+import es.albarregas.DAO.IProvinciasDAO;
+import es.albarregas.DAO.IPueblosDAO;
 import es.albarregas.DAO.IUsuariosDAO;
 import es.albarregas.beans.Clientes;
+import es.albarregas.beans.Direcciones;
 import es.albarregas.beans.Pedido;
+import es.albarregas.beans.Pueblos;
 import es.albarregas.beans.Usuarios;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,6 +51,10 @@ public class Login extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IUsuariosDAO usr = daof.getUsuarios();
+            IClientesDAO clientDao = daof.getClientes();
+            IDireccionesDAO dirDao = daof.getDirecciones();
+            IPueblosDAO puebloDao = daof.getPueblos();
+            IProvinciasDAO provsDao = daof.getProvincias();
             IPedidosDAO pedidoDao = daof.getPedidos();
             ILineasPedidoDAO lineasPedidoDao = daof.getLineasPedidos();
             
@@ -57,9 +67,18 @@ public class Login extends HttpServlet {
             } else if (usuario.getClave().equals(request.getParameter("pass"))) {//si hay campos vacios devolvemos un mensaje de error
                 IClientesDAO client = daof.getClientes();
                 Clientes cliente=client.getCliente(usuario.getIdUsuario()); //obtenemos el cliente relacionado con ese usuario
-                Pedido pedido=pedidoDao.getPedido(usuario.getIdUsuario()); //optenemos el pedido del carrito de ese usuario
+                Pedido pedido=pedidoDao.getPedido(usuario.getIdUsuario()); //obtenemos el pedido del carrito de ese usuario
+                ArrayList<Direcciones> direcciones=dirDao.getDirecciones(cliente.getIdCliente()); //obtenemos las direcciones de este cliente
+ 
+                if(direcciones!=null){//si el usuario tiene direcciones de envío las almacenamos en el cliente
+                    for(int i=0; i<direcciones.size();i++){
+                        Pueblos pueblo=puebloDao.getNombreCodigoPostal(direcciones.get(i).getIdPueblo());
+                        direcciones.get(i).setLocalidad(pueblo.getNombrePueblo());
+                        direcciones.get(i).setProvincia(provsDao.getProvincia(pueblo.getIdProvincia()));
+                    }
+                    cliente.setDirecciones(direcciones);
+                }
                 
-              
                 HttpSession sesion = request.getSession(true); //almacenamos usuario y cliente en sesion        
                 sesion.setAttribute("cliente", cliente);             
                 sesion.setAttribute("login", usuario);

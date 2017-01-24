@@ -41,5 +41,22 @@ public class ProvinciasDAO implements IProvinciasDAO{
         ConnectionFactory.closeConnection();
         return provincias;
     }
+
+    @Override
+    public String getProvincia(Integer IdProvincia) {
+        String provincia="";
+       try {
+            sentencia = conexion.getConnection().createStatement();
+            resultado = sentencia.executeQuery("select Nombre from Provincias where IdProvincia="+IdProvincia);
+            if(resultado.next()){
+                provincia=resultado.getString("Nombre");
+            }
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+        return provincia;
+    }
     
 }

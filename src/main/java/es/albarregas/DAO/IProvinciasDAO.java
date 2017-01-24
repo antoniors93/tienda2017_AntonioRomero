@@ -15,5 +15,6 @@ import es.albarregas.beans.Provincias;
 public interface IProvinciasDAO {
     
     public ArrayList<Provincias> getProvincias();
+    public String getProvincia(Integer IdProvincia);
     
 }

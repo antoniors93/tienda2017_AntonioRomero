@@ -49,7 +49,7 @@ public class OperacionesCarrito extends HttpServlet {
             Pedido pedido = (Pedido) sesion.getAttribute("pedido");//obtenemos el pedido que está en el carrito
 
             //si actualizamos las unidades de una linea de producto
-            if (request.getParameter("opcion")!=null) {
+            if (request.getParameter("opcion") != null) {
                 //actualizamos la linea modificada   
                 lineaDao.updateLineaPedido(pedido.getIdPedido(), Integer.parseInt(request.getParameter("numLinea")), Integer.parseInt(request.getParameter("cantidad")));
                 //añadimos las lineas actualizadas al pedido
@@ -66,7 +66,13 @@ public class OperacionesCarrito extends HttpServlet {
             }
 
             //volvemos a almacenar el pedido en sesion
-            sesion.setAttribute("pedido", pedido);
+            if (pedido.getLineasPedido().size() == 0) {
+                sesion.setAttribute("pedido", null); 
+                pedidoDao.deletePedido(pedido.getIdPedido());//si borrmos la ultima linea de pedido se borra el pedido
+            } else {
+                sesion.setAttribute("pedido", pedido);
+            }
+
         }
     }
 

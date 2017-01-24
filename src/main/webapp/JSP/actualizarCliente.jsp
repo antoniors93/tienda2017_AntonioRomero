@@ -66,7 +66,7 @@
                                             </select>
                                         </li>
                                         <li><label>Código postal</label>
-                                            <select name=codigoPostal" id="codPostal" required>
+                                            <select name="codigoPostal" id="codPostal" required>
                                             </select>
                                         </li>
                                     </ul>

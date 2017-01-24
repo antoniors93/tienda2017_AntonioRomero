@@ -6,10 +6,8 @@
 package es.albarregas.Controllers;
 
 import com.google.gson.Gson;
-import es.albarregas.DAO.ICodigoPostalDAO;
 import es.albarregas.DAO.IProvinciasDAO;
 import es.albarregas.DAO.IPueblosDAO;
-import es.albarregas.beans.CodigoPostal;
 import es.albarregas.beans.Provincias;
 import es.albarregas.beans.Pueblos;
 import es.albarregas.daofactory.DAOFactory;
@@ -46,7 +44,6 @@ public class Localidades extends HttpServlet {
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IProvinciasDAO provsDao = daof.getProvincias();
             IPueblosDAO pueblosDao = daof.getPueblos();
-            ICodigoPostalDAO codsDao = daof.getCodigosPostales();
             String json = null;
             
             if (request.getParameter("provs") != null) {
@@ -62,8 +59,8 @@ public class Localidades extends HttpServlet {
                 response.getWriter().write(json);
             }
             if(request.getParameter("nombrePueblo")!=null){
-                ArrayList<CodigoPostal> codsPostales= codsDao.getCodigosPostales(request.getParameter("nombrePueblo"));
-                json = new Gson().toJson(codsPostales);
+                ArrayList<Pueblos> pueblos= pueblosDao.getCodigosPostales(request.getParameter("nombrePueblo"));
+                json = new Gson().toJson(pueblos);
                 response.setContentType("application/json");
                 response.getWriter().write(json);
             }                

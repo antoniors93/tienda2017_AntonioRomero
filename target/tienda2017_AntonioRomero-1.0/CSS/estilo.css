@@ -332,9 +332,13 @@ body{
     margin-bottom: 4rem;
     margin-left: 12%;
 }
+.localizacion li{
+    width: 100%;
+    margin: 0 auto;
+}
 .localizacion select{
     font-size: 14px;
-    width: 200px;
+    width: 70%;
     display: block;
 }
 .localizacion input{

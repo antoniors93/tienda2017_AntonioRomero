@@ -6,14 +6,17 @@
 package es.albarregas.Controllers;
 
 import es.albarregas.DAO.IClientesDAO;
-import es.albarregas.DAO.ICodigoPostalDAO;
 import es.albarregas.DAO.IDireccionesDAO;
+import es.albarregas.DAO.IProvinciasDAO;
+import es.albarregas.DAO.IPueblosDAO;
 import es.albarregas.beans.Clientes;
 import es.albarregas.beans.Direcciones;
+import es.albarregas.beans.Pueblos;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,11 +48,10 @@ public class ActualizarCliente extends HttpServlet {
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IClientesDAO clientDao = daof.getClientes();
             IDireccionesDAO dirDao = daof.getDirecciones();
-            ICodigoPostalDAO cpDao = daof.getCodigosPostales();
+            IPueblosDAO puebloDao = daof.getPueblos();
+            IProvinciasDAO provsDao = daof.getProvincias();
             HttpSession sesion= request.getSession(true);
             Clientes sesionClient=(Clientes)sesion.getAttribute("cliente");
-            
-            out.println(request.getParameter("datos"));
             
             if(request.getParameter("datos")!=null){
                 Clientes cliente=new Clientes();
@@ -67,15 +69,39 @@ public class ActualizarCliente extends HttpServlet {
             }
             if(request.getParameter("direccion")!=null){
                 Direcciones direccion = new Direcciones();
+                
+                direccion.setIdCliente(sesionClient.getIdCliente());
                 direccion.setNombreDireccion(request.getParameter("nombreDireccion"));
                 direccion.setDireccion(request.getParameter("direccion"));
                 direccion.setTelefono(request.getParameter("telefono"));
-                direccion.setProvincia(request.getParameter("provincia"));
-                direccion.setLocalidad(request.getParameter("pueblo"));
                 direccion.setIdPueblo(Integer.parseInt(request.getParameter("codigoPostal")));
-                direccion.setCodigoPostal(cpDao.getCodigoPostal(direccion.getIdPueblo()));
+                
+                direccion.setProvincia(provsDao.getProvincia(Integer.parseInt(request.getParameter("provincia"))));
+                Pueblos pueblo=puebloDao.getNombreCodigoPostal(direccion.getIdPueblo());
+                direccion.setLocalidad(pueblo.getNombrePueblo());
+                direccion.setCodigoPostal(pueblo.getCodigoPostal());
+                direccion.setIdDireccion(dirDao.getIdDireccion()+1);
+                
+                ArrayList<Direcciones> direcciones=dirDao.getDirecciones(sesionClient.getIdCliente());
+                
+                if(direcciones==null){                                       
+                    direcciones = new ArrayList();
+                    direcciones.add(direccion);
+                    sesionClient.setDirecciones(direcciones);
+                    sesion.setAttribute("cliente", sesionClient);
+                }else{
+                    for(int i=0; i<direcciones.size();i++){
+                        pueblo=puebloDao.getNombreCodigoPostal(direcciones.get(i).getIdPueblo());
+                        direcciones.get(i).setLocalidad(pueblo.getNombrePueblo());
+                        direcciones.get(i).setProvincia(provsDao.getProvincia(pueblo.getIdProvincia()));
+                    }
+                    direcciones.add(direccion);
+                    sesionClient.setDirecciones(direcciones);
+                    sesion.setAttribute("cliente", sesionClient);
+                }
+                dirDao.insertarDireccion(direccion);
             }
-            response.sendRedirect("JSP/perfilCliente.jsp");
+             response.sendRedirect("JSP/perfilCliente.jsp");
         }
     }
 

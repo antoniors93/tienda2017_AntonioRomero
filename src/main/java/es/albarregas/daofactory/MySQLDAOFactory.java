@@ -3,12 +3,10 @@ package es.albarregas.daofactory;
 import es.albarregas.DAO.CaractsProdDAO;
 import es.albarregas.DAO.CategoriasDAO;
 import es.albarregas.DAO.ClientesDAO;
-import es.albarregas.DAO.CodigoPostalDAO;
 import es.albarregas.DAO.DireccionesDAO;
 import es.albarregas.DAO.ICaractsProdDAO;
 import es.albarregas.DAO.ICategoriasDAO;
 import es.albarregas.DAO.IClientesDAO;
-import es.albarregas.DAO.ICodigoPostalDAO;
 import es.albarregas.DAO.IDireccionesDAO;
 import es.albarregas.DAO.IImagenesDAO;
 import es.albarregas.DAO.ILineasPedidoDAO;
@@ -70,9 +68,6 @@ public class MySQLDAOFactory extends DAOFactory{
     }
     public IPueblosDAO getPueblos(){
         return new PueblosDAO();
-    }
-    public ICodigoPostalDAO getCodigosPostales(){
-        return new CodigoPostalDAO();
     }
     
 }

@@ -3,7 +3,6 @@ package es.albarregas.daofactory;
 import es.albarregas.DAO.ICaractsProdDAO;
 import es.albarregas.DAO.ICategoriasDAO;
 import es.albarregas.DAO.IClientesDAO;
-import es.albarregas.DAO.ICodigoPostalDAO;
 import es.albarregas.DAO.IDireccionesDAO;
 import es.albarregas.DAO.IImagenesDAO;
 import es.albarregas.DAO.ILineasPedidoDAO;
@@ -31,7 +30,6 @@ public abstract class DAOFactory {
     public abstract IDireccionesDAO getDirecciones();
     public abstract IProvinciasDAO getProvincias();
     public abstract IPueblosDAO getPueblos();
-    public abstract ICodigoPostalDAO getCodigosPostales();
     
     public static DAOFactory getDAOFactory(int tipo){
         DAOFactory daof = null;
