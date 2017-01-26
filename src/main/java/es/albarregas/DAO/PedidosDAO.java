@@ -64,4 +64,16 @@ public class PedidosDAO implements IPedidosDAO{
         ConnectionFactory.closeConnection();
     }
     
+    public void updatePedido(Integer IdPedido, String Estado ,Double BaseImponible){
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("update pedidos set Estado='"+Estado+"', BaseImponible="+BaseImponible+" where IdPedido="+IdPedido);
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+    }
+
+    
 }

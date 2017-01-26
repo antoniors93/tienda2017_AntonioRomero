@@ -119,7 +119,7 @@
                     }else{
                     var idProducto = ${producto.idProducto};
                    $.post('${contexto}/Compra', {
-                            idProducto : idProducto,
+                            idProducto : idProducto
 			}, function(responseText) {
                             $('.numero-carrito').text(responseText);
 			});

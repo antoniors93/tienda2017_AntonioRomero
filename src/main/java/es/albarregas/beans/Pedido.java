@@ -21,7 +21,7 @@ public class Pedido {
     private double BaseImponible;
     private double Descuento;
     private double GastosEnvio;
-    private double Iba;
+    private double Iva;
     private int IdDireccion;
     private ArrayList<LineaPedido> LineasPedido;
 
@@ -89,12 +89,12 @@ public class Pedido {
         this.GastosEnvio = GastosEnvio;
     }
 
-    public double getIba() {
-        return Iba;
+    public double getIva() {
+        return Iva;
     }
 
-    public void setIba(double Iba) {
-        this.Iba = Iba;
+    public void setIva(double Iva) {
+        this.Iva = Iva;
     }
 
     public int getIdDireccion() {

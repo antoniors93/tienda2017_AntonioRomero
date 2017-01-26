@@ -5,9 +5,15 @@
  */
 package es.albarregas.Controllers;
 
-import es.albarregas.beans.Clientes;
+import es.albarregas.DAO.IPedidosDAO;
+import es.albarregas.DAO.IProductosDAO;
+import es.albarregas.beans.LineaPedido;
+import es.albarregas.beans.Pedido;
+import es.albarregas.beans.Productos;
+import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +25,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Antonio
  */
-@WebServlet(name = "FinalizarCompra", urlPatterns = {"/FinalizarCompra"})
-public class FinalizarCompra extends HttpServlet {
+@WebServlet(name = "RealizarPago", urlPatterns = {"/RealizarPago"})
+public class RealizarPago extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,15 +43,25 @@ public class FinalizarCompra extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
+            DAOFactory daof = DAOFactory.getDAOFactory(1);
+            IPedidosDAO pedidoDao = daof.getPedidos();     
+            IProductosDAO prodsDao = daof.getProductos();
             HttpSession sesion= request.getSession(true);
-            Clientes cliente = (Clientes)sesion.getAttribute("cliente");
-            if(cliente.getDirecciones()==null||cliente.getNombre().equals("vacío")||
-                cliente.getApellidos().equals("vacío")||cliente.getNIF().equals("vacío")){
-                    request.setAttribute("comprar", true);
-                    request.getRequestDispatcher("/JSP/actualizarCliente.jsp").forward(request, response);
-            }else{
-                response.sendRedirect(request.getContextPath()+"/JSP/finalizarCompra.jsp");
+            
+            Pedido pedido=(Pedido)sesion.getAttribute("pedido");
+            ArrayList<LineaPedido> lineaspedido = pedido.getLineasPedido();
+            
+            double baseImponible=0;
+            for(int i=0; i<lineaspedido.size();i++){
+                Productos producto = prodsDao.getProducto(lineaspedido.get(i).getIdProducto());
+                double precio=producto.getPrecioUnitario();
+                baseImponible=baseImponible+precio*lineaspedido.get(i).getCantidad();
             }
+            
+            pedidoDao.updatePedido(pedido.getIdPedido(), "r", baseImponible);
+            sesion.setAttribute("pedido", null);
+            response.sendRedirect(request.getContextPath()+"/JSP/comprasCliente.jsp");
+            
         }
     }
 

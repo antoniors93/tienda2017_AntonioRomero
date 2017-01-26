@@ -15,7 +15,7 @@ public class LineaPedido {
     private int NumeroLinea;
     private int IdProducto;
     private int cantidad;
-    private int PrecioUnitario;
+    private double PrecioUnitario;
 
     public int getIdPedido() {
         return IdPedido;
@@ -49,11 +49,11 @@ public class LineaPedido {
         this.cantidad = cantidad;
     }
 
-    public int getPrecioUnitario() {
+    public double getPrecioUnitario() {
         return PrecioUnitario;
     }
 
-    public void setPrecioUnitario(int PrecioUnitario) {
+    public void setPrecioUnitario(double PrecioUnitario) {
         this.PrecioUnitario = PrecioUnitario;
     }
 }

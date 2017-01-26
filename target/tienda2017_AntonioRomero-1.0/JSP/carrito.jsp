@@ -40,9 +40,9 @@
                                         <c:set var="contador" value="${contador+1}"/>
                                         <tr class="text-left">
                                         <td><c:out value="${producto.denominacion}"/></td>
-                                        <td><c:out value="${producto.precioUnitario}"/></td>
+                                        <td class="precioU"><c:out value="${producto.precioUnitario}"/></td>
                                         <td>
-                                            <select  class="cantidad" style="width: 40px">
+                                            <select class="cantidad" style="width: 40px">
                                                 <c:forEach begin="1" step="1" var="valor" end="${producto.stock}">
                                                     <option value="${valor}"><c:out value="${valor}"/></option>
                                                     <c:if test="${linea.cantidad==valor}">
@@ -61,13 +61,57 @@
                                     <tr>
                                         <td colspan="4">No hay productos añadidos</td>
                                     </tr>
-                                </c:if>
+                           </c:if>
+                           <c:if test="${contador!=0}">
+                                <tr>
+                                    <td id="precGeneral" colspan="4" style="font-size: 18px; padding-bottom: 1rem;"><p id="precTotal">Precio total:</p> <p style="font-size: 10px;">(iva y gastos de envío no incluidos)</p></td>
+                                </tr>
+                           </c:if>
                         </table>
                         <div class="botones-carrito text-center col-xs-12 col-sm-12">
-                            <a href="${contexto}/FinalizarCompra?op=comprar">Confirmar pedido</a>
-                            <a id="cancelar-pedido" href="${contexto}/CerrarPedido?op=cancelar">Cancelar pedido</a>
+                            <c:if test="${pedido==null}">
+                                <a href="" data-toggle="modal" data-target="#modalConfirmar">Confirmar pedido</a>
+                                <a href="" data-toggle="modal" data-target="#modalConfirmar">Cancelar pedido</a>
+                            </c:if>
+                            <c:if test="${pedido!=null}">
+                                <a href="${contexto}/FinalizarCompra">Confirmar pedido</a>
+                                <a href="" data-toggle="modal" data-target="#modalCancelar">Cancelar pedido</a>
+                            </c:if>                             
                         </div>
-                        <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                        <div id="modalConfirmar" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h3 class="modal-title">Operación denegada</h3>
+                                    </div>
+                                    <div class="modal-body text-left">
+                                        <h4 style="color:black">Su carrito está vacío.</h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#" data-dismiss="modal" class="btn btn-default">Cerrar</a>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+                        <div id="modalCancelar" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h3 class="modal-title">Cancelar pedido</h3>
+                                    </div>
+                                    <div class="modal-body text-left">
+                                        <h4 style="color:black">¿Está seguro de que desea cancelar su pedido?</h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <a href="${contexto}/CerrarPedido?op=cancelar"><button type="button" class="btn btn-default">Aceptar</button></a>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+                        <div id="modalBorrar" class="modal fade" tabindex="-1" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -88,20 +132,37 @@
             </div>
         </div>
         <jsp:include page="../INC/pie.jsp"></jsp:include>
+        
+        <script>
+            $('#precTotal').html("Precio total: ");
+            $('#precTotal').append(calcularTotal()+"€");
+            function calcularTotal(){
+                var total=0;
+                $('#tabla tr').each(function(){                    
+                    var cant=$(this).find('td .cantidad option:selected').text();
+                    var precio=$(this).find('.precioU').text();
+                    total=total+cant*precio;
+                });
+                return parseFloat(total).toFixed(2);
+            }
+            </script>
             <script> 
                 $(document).ready(function() {
                     $('.btn-eliminar').click(function(event) {
-                        $(this).parent().parent().hide();                      
+                        $(this).parent().parent().remove();                      
                         var numLinea = $(this).val();
                        $.post('${contexto}/OperacionesCarrito', {
                                 numLinea: numLinea                              
                             }, function(responseText) {
                                 if(responseText==0){                                
                                     $('#tabla').append('<tr><td colspan="4">No hay productos añadidos</td></tr>');
+                                    $('#precGeneral').remove();
                                     $('.numero-carrito').text("");        
-                                    $("#mostrarmodal").modal("show");
+                                    $("#modalBorrar").modal("show");
                                 }else{
                                 $('.numero-carrito').text(responseText);
+                                $('#precTotal').html("Precio total: ");
+                                $('#precTotal').append(calcularTotal()+"€");
                             }
                             });
                     });
@@ -118,6 +179,8 @@
                             numLinea : numLinea,
                             opcion : opcion
                         }, function(responseText) {
+                            $('#precTotal').html("Precio total: ");
+                            $('#precTotal').append(calcularTotal()+"€");
                         });
                 });
             });

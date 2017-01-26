@@ -36,45 +36,62 @@
                             <div class="lista-datos-pers col-sm-6">
                                 <h4 class="text-center">Datos personales</h4>
                                 <form action="${contexto}/ActualizarCliente" method="post">
-                                <ul class="lista-update-datos">
-                                    <li><label>Nombre: </label><input type="text" name="nombre" value="${cliente.nombre}" pattern="^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$" required/></li>
-                                    <li><label>Apellidos: </label><input type="text" name="apellidos" value="${cliente.apellidos}" pattern="^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$" required/></li>
-                                    <li><label>NIF: </label><input type="text" name="nif" value="${cliente.NIF}" pattern="\d{8}[A-Z]$"required/></li>
-                                    <li><label>Fecha de nacimiento: </label><input type="date" name="fechaNac" value="${cliente.fechaNacimiento}" required</li>
-                                </ul>
-                                <div class="btn-update-cliente col-xs-12 text-center">
-                                    <input type="submit" name="datos" value="Modificar">
-                                </div>
+                                    <ul class="lista-update-datos">
+                                        <li><label>Nombre: </label><input type="text" name="nombre" value="${cliente.nombre}" pattern="^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$" required/></li>
+                                        <li><label>Apellidos: </label><input type="text" name="apellidos" value="${cliente.apellidos}" pattern="^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$" required/></li>
+                                        <li><label>NIF: </label><input type="text" name="nif" value="${cliente.NIF}" pattern="\d{8}[A-Z]$"required/></li>
+                                        <li><label>Fecha de nacimiento: </label><input type="date" name="fechaNac" value="${cliente.fechaNacimiento}" required</li>
+                                    </ul>
+                                    <div class="btn-update-cliente col-xs-12 text-center">
+                                        <input type="submit" name="datos" value="Modificar">
+                                    </div>
                                 </form>
                             </div>
                             <div class="col-sm-6 lista-datos-direccion">
                                 <h4 class="text-center">Nueva dirección de envío:</h4>
                                 <form action="${contexto}/ActualizarCliente" method="post">
-                                <ul class="lista-update-datos">                                   
-                                    <li><label>Vía: </label><input type="text" name="nombreDireccion" value="${direccion.nombreDireccion}" required/></li>
-                                    <li><label>Dirección: </label><input type="text" name="direccion" value="${direccion.direccion}" required/></li>    
-                                    <li><label>Teléfono: <input type="tel" name="telefono" pattern="^[9|8|7|6]\d{8}$" required/></label>
-                                </ul>
-                                <div class="localizacion col-sm-12 col-xs-12 display-flex">
-                                    <ul>
-                                        <li><label>Provincia</label>
-                                            <select name="provincia" id="provincias" required>
-                                            </select>
-                                        </li>
-                                        <li><label>Localidad</label>
-                                            <select name="pueblo" id="pueblos" required>
-                                            </select>
-                                        </li>
-                                        <li><label>Código postal</label>
-                                            <select name="codigoPostal" id="codPostal" required>
-                                            </select>
-                                        </li>
+                                    <ul class="lista-update-datos">                                   
+                                        <li><label>Vía: </label><input type="text" name="nombreDireccion" value="${direccion.nombreDireccion}" required/></li>
+                                        <li><label>Dirección: </label><input type="text" name="direccion" value="${direccion.direccion}" required/></li>    
+                                        <li><label>Teléfono: <input type="tel" name="telefono" pattern="^[9|8|7|6]\d{8}$" required/></label>
                                     </ul>
-                                </div>
-                                <div class="btn-update-cliente col-xs-12 text-center">
-                                <input class="btn-update-cliente" type="submit" name="direccion" value="Añadir">
-                                </div>
+                                    <div class="localizacion col-sm-12 col-xs-12 display-flex">
+                                        <ul>
+                                            <li><label>Provincia</label>
+                                                <select name="provincia" id="provincias" required>
+                                                    <option>Seleccione su provincia</option>
+                                                </select>
+                                            </li>
+                                            <li><label>Localidad</label>
+                                                <select name="pueblo" id="pueblos" required>
+                                                </select>
+                                            </li>
+                                            <li><label>Código postal</label>
+                                                <select name="codigoPostal" id="codPostal" required>
+                                                </select>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-update-cliente col-xs-12 text-center">
+                                        <input class="btn-update-cliente" type="submit" name="direccion" value="Añadir">
+                                    </div>
                                 </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="modalMensaje" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h3>Aviso</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <h4 style="color:black">Facilita la siguiente información para poder realizar tus compras.</h4>   
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" data-dismiss="modal" class="btn btn-default">Cerrar</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -83,52 +100,58 @@
         </div>
         <jsp:include page="../INC/pie.jsp"></jsp:include>
         <script>
-        $(document).ready(function() {
-            var provs="cargarProvs";
-            $.post('${contexto}/Localidades', {
-                provs : provs
-            }, function(response) {
-                var select = $('#provincias');
-                select.find('option').remove();
-                  $.each(response, function(index, value) {
-                  $('<option>').val(value.IdProvincia).text(value.NombreProvincia).appendTo(select);
-                });
+            $(document).ready(function() {
+                if(${comprar}){                    
+                    $("#modalMensaje").modal("show");
+                }
             });
-        });
+        </script>
+            <script>
+            $(document).ready(function() {
+                var provs="cargarProvs";
+                $.post('${contexto}/Localidades', {
+                    provs : provs
+                }, function(response) {
+                    var select = $('#provincias');
+                        $.each(response, function (index, value) {
+                            $('<option>').val(value.IdProvincia).text(value.NombreProvincia).appendTo(select);
+                        });
+                    });
+                });
         </script>
         <script>
-        $(document).ready(function() {
+            $(document).ready(function () {
 
-        $('#provincias').change(function(event) {
-                var idProvincia = $(this).val();
-                $.post('${contexto}/Localidades', {
-                        idProvincia : idProvincia
-                }, function(response) {
-                var select = $('#pueblos');
-                select.find('option').remove();
-                  $.each(response, function(index, value) {
-                  $('<option>').val(value.NombrePueblo).text(value.NombrePueblo).appendTo(select);
-                });
+                $('#provincias').change(function (event) {
+                    var idProvincia = $(this).val();
+                    $.post('${contexto}/Localidades', {
+                        idProvincia: idProvincia
+                    }, function (response) {
+                        var select = $('#pueblos');
+                        select.find('option').remove();
+                        $.each(response, function (index, value) {
+                            $('<option>').val(value.NombrePueblo).text(value.NombrePueblo).appendTo(select);
+                        });
+                    });
                 });
             });
-        });
         </script>
         <script>
-        $(document).ready(function() {
+            $(document).ready(function () {
 
-        $('#pueblos').change(function(event) {
-                var nombrePueblo= $(this).val();
-                $.post('${contexto}/Localidades', {
-                        nombrePueblo : nombrePueblo
-                }, function(response) {
-                    var select = $('#codPostal');
-                    select.find('option').remove();
-                  $.each(response, function(index, value) {
-                  $('<option>').val(value.IdPueblo).text(value.CodigoPostal).appendTo(select);
-                });
+                $('#pueblos').change(function (event) {
+                    var nombrePueblo = $(this).val();
+                    $.post('${contexto}/Localidades', {
+                        nombrePueblo: nombrePueblo
+                    }, function (response) {
+                        var select = $('#codPostal');
+                        select.find('option').remove();
+                        $.each(response, function (index, value) {
+                            $('<option>').val(value.IdPueblo).text(value.CodigoPostal).appendTo(select);
+                        });
+                    });
                 });
             });
-        });
         </script>
     </body>
 </html> 

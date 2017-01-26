@@ -16,4 +16,5 @@ public interface IPedidosDAO {
     public void insertPedido(Integer IdCliente);
     public Pedido getPedido(Integer IdCliente);
     public void deletePedido(Integer IdPedido);
+    public void updatePedido(Integer IdPedido, String Estado, Double BaseImponible);
 }
