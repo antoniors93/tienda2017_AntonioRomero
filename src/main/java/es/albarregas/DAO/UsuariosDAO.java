@@ -47,7 +47,7 @@ public class UsuariosDAO implements IUsuariosDAO {
         try {
             sentencia = conexion.getConnection().createStatement();
             sentencia.executeUpdate("insert into Usuarios (Email,Clave,UltimoAcceso,Tipo) values "
-                    + "('"+Email+"', password('"+Password+"'),now(),'u')");
+                    + "('"+Email+"', '"+Password+"',now(),'u')");
                 mensaje = "SUCCESS";
             } catch (SQLException e) {
                 mensaje = "FAILURE";

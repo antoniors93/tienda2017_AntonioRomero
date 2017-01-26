@@ -80,4 +80,16 @@ public class ProductosDAO implements IProductosDAO {
         return producto;
     }
 
+    @Override
+    public void updatePrecio(Integer IdProducto, int cantidad) {
+       try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("update Productos set stock="+cantidad+" where IdProducto="+IdProducto);
+        } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+        }
+        ConnectionFactory.closeConnection();
+    }
+
 }

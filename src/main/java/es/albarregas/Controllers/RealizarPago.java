@@ -51,16 +51,23 @@ public class RealizarPago extends HttpServlet {
             Pedido pedido=(Pedido)sesion.getAttribute("pedido");
             ArrayList<LineaPedido> lineaspedido = pedido.getLineasPedido();
             
+            String estado="r";
             double baseImponible=0;
             for(int i=0; i<lineaspedido.size();i++){
                 Productos producto = prodsDao.getProducto(lineaspedido.get(i).getIdProducto());
                 double precio=producto.getPrecioUnitario();
-                baseImponible=baseImponible+precio*lineaspedido.get(i).getCantidad();
+                if(producto.getStock()>=lineaspedido.get(i).getCantidad()){
+                    baseImponible=baseImponible+precio*lineaspedido.get(i).getCantidad();
+                    prodsDao.updatePrecio(producto.getIdProducto(), producto.getStock()-lineaspedido.get(i).getCantidad());
+                }else{
+                    estado="p";
+                }
             }
             
-            pedidoDao.updatePedido(pedido.getIdPedido(), "r", baseImponible);
+            pedidoDao.updatePedido(pedido.getIdPedido(), estado, baseImponible);
             sesion.setAttribute("pedido", null);
-            response.sendRedirect(request.getContextPath()+"/JSP/comprasCliente.jsp");
+            request.setAttribute("estado", estado);
+            request.getRequestDispatcher("/JSP/comprasCliente.jsp").forward(request, response);
             
         }
     }

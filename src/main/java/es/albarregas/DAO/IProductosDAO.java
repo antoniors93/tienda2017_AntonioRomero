@@ -15,4 +15,5 @@ public interface IProductosDAO {
     
     public ArrayList<Productos> getProductos();
     public Productos getProducto(Integer IdProducto);
+    public void updatePrecio(Integer IdProducto, int cantidad);
 }
