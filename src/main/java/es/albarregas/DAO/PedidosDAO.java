@@ -9,6 +9,7 @@ import es.albarregas.beans.Pedido;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -67,12 +68,36 @@ public class PedidosDAO implements IPedidosDAO{
     public void updatePedido(Integer IdPedido, String Estado ,Double BaseImponible){
         try {
             sentencia = conexion.getConnection().createStatement();
-            sentencia.executeUpdate("update pedidos set Estado='"+Estado+"', BaseImponible="+BaseImponible+" where IdPedido="+IdPedido);
+            sentencia.executeUpdate("update pedidos set Estado='"+Estado+"', BaseImponible="+BaseImponible+", Fecha=now() where IdPedido="+IdPedido);
             } catch (SQLException e) {
             System.out.println("Problemas al visualizar");
             e.printStackTrace();
             }
         ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    public ArrayList<Pedido> getPedidos(Integer IdCliente) {
+    ArrayList<Pedido> pedidos = null;
+        
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            resultado = sentencia.executeQuery("select * from pedidos where IdCliente="+IdCliente+" and Estado<>'n'");
+            pedidos=new ArrayList();
+            while(resultado.next()){
+                Pedido pedido=new Pedido();
+                pedido.setIdPedido(resultado.getInt("IdPedido"));
+                pedido.setFecha(resultado.getDate("Fecha"));
+                pedido.setEstado(resultado.getString("Estado").charAt(0));
+                pedido.setBaseImponible(resultado.getDouble("BaseImponible"));
+                pedidos.add(pedido);
+            }
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+        return pedidos;    
     }
 
     

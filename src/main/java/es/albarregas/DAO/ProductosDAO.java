@@ -81,7 +81,7 @@ public class ProductosDAO implements IProductosDAO {
     }
 
     @Override
-    public void updatePrecio(Integer IdProducto, int cantidad) {
+    public void updateStock(Integer IdProducto, int cantidad) {
        try {
             sentencia = conexion.getConnection().createStatement();
             sentencia.executeUpdate("update Productos set stock="+cantidad+" where IdProducto="+IdProducto);

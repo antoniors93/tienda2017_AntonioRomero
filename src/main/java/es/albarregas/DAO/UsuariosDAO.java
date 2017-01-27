@@ -31,7 +31,6 @@ public class UsuariosDAO implements IUsuariosDAO {
               usuario.setIdUsuario(resultado.getInt("IdUsuario"));
               usuario.setEmail(resultado.getString("Email"));
               usuario.setClave(resultado.getString("Clave"));
-              usuario.setUltimoAcceso(resultado.getTimestamp("UltimoAcceso"));
             }
             } catch (SQLException e) {
             System.out.println("Problemas al visualizar");

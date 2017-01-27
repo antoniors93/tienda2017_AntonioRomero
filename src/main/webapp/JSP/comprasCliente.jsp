@@ -17,7 +17,38 @@
             <div class="container-fluid cuerpo"> 
                 <div class="row">
                     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-                        <h3>Compras realizadas</h3>
+                        <div class="div-breadcrumb col-xs-12 col-sm-12">
+                            <ul class="breadcrumb col-sm-6">
+                                <li><a href="${contexto}/">Inicio</a></li>
+                            <li><a href="${contexto}/JSP/perfilCliente.jsp">Perfil de usuario</a></li>
+                            <li class="active">Consultar compras</li>
+                            
+                        </ul>
+                    </div>
+                            <div class="cuerpo-perfil col-sm-12 col-xs-12">
+                        <h2 class="text-center">Compras realizadas</h2>
+                        <ul class="lista-compras">
+                        <c:forEach var="pedido" items="${pedidos}">
+                            <li>Pedido <c:out value="${pedido.idPedido}"/> (<c:out value="${pedido.fecha}"/>)</li>
+                            <ul>
+                                <li>
+                                    <c:if test="${pedido.estado eq 'p'.charAt(0)}">Estado: pendiente.</c:if>
+                                    <c:if test="${pedido.estado eq 'r'.charAt(0)}">Estado: remitido.</c:if>
+                                </li>
+                            <li>Importe: <c:out value="${pedido.baseImponible}"/>€</li>
+                            <li>Productos:</li>
+                            <ul>
+                               <c:forEach var="linea" items="${pedido.lineasPedido}">
+                                   <c:forEach var="producto" items="${productos}">
+                                       <c:if test="${producto.idProducto==linea.idProducto}">
+                                           <li>x<c:out value="${linea.cantidad}"/> <c:out value="${producto.denominacion}"/></li>
+                                       </c:if>
+                                   </c:forEach>
+                               </c:forEach>
+                            </ul>
+                            </ul>
+                        </c:forEach>
+                        </ul>
                     </div>
                     <div id="modalMensaje" class="modal fade" tabindex="-1" role="dialog">
                         <div class="modal-dialog">
@@ -35,6 +66,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         <jsp:include page="../INC/pie.jsp"></jsp:include>
