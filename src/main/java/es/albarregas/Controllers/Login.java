@@ -57,39 +57,38 @@ public class Login extends HttpServlet {
             IProvinciasDAO provsDao = daof.getProvincias();
             IPedidosDAO pedidoDao = daof.getPedidos();
             ILineasPedidoDAO lineasPedidoDao = daof.getLineasPedidos();
-            
-            Usuarios usuario = usr.getUsuarios(request.getParameter("email"));
+
+            Usuarios usuario = usr.getUsuarios(request.getParameter("email"), request.getParameter("pass"));
             //buscamos el usuario con el email introducido
-            
+
             String mensaje = "";
             if (usuario == null) { //si no se ha encontrado un usuario devolvemos un mensaje de error
                 mensaje = "FAILURE";
-            } else if (usuario.getClave().equals(request.getParameter("pass"))) {//si hay campos vacios devolvemos un mensaje de error
+            } else {
                 IClientesDAO client = daof.getClientes();
-                Clientes cliente=client.getCliente(usuario.getIdUsuario()); //obtenemos el cliente relacionado con ese usuario
-                Pedido pedido=pedidoDao.getPedido(usuario.getIdUsuario()); //obtenemos el pedido del carrito de ese usuario
-                ArrayList<Direcciones> direcciones=dirDao.getDirecciones(cliente.getIdCliente()); //obtenemos las direcciones de este cliente
- 
-                if(direcciones!=null){//si el usuario tiene direcciones de envío las almacenamos en el cliente
-                    for(int i=0; i<direcciones.size();i++){
-                        Pueblos pueblo=puebloDao.getNombreCodigoPostal(direcciones.get(i).getIdPueblo());
+                Clientes cliente = client.getCliente(usuario.getIdUsuario()); //obtenemos el cliente relacionado con ese usuario
+                Pedido pedido = pedidoDao.getPedido(usuario.getIdUsuario()); //obtenemos el pedido del carrito de ese usuario
+                ArrayList<Direcciones> direcciones = dirDao.getDirecciones(cliente.getIdCliente()); //obtenemos las direcciones de este cliente
+
+                if (direcciones != null) {//si el usuario tiene direcciones de envío las almacenamos en el cliente
+                    for (int i = 0; i < direcciones.size(); i++) {
+                        Pueblos pueblo = puebloDao.getNombreCodigoPostal(direcciones.get(i).getIdPueblo());
                         direcciones.get(i).setLocalidad(pueblo.getNombrePueblo());
                         direcciones.get(i).setProvincia(provsDao.getProvincia(pueblo.getIdProvincia()));
                     }
                     cliente.setDirecciones(direcciones);
                 }
-                
+
                 HttpSession sesion = request.getSession(true); //almacenamos usuario y cliente en sesion        
-                sesion.setAttribute("cliente", cliente);             
+                sesion.setAttribute("cliente", cliente);
                 sesion.setAttribute("login", usuario);
-                
-                if(pedido!=null){ //si el usuario tiene algun pedido en el carrito le añadimos las lineas y lo guardamos en sesion
+
+                if (pedido != null) { //si el usuario tiene algun pedido en el carrito le añadimos las lineas y lo guardamos en sesion
                     pedido.setLineasPedido(lineasPedidoDao.getLineasPedido(pedido.getIdPedido()));
                     sesion.setAttribute("pedido", pedido);
-                }               
+                }
                 mensaje = "SUCCESS";
-            } else {
-                mensaje = "FAILURE";
+
             }
             response.getWriter().write(mensaje);
         }

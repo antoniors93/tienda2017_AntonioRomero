@@ -53,17 +53,17 @@ public class Compra extends HttpServlet {
             
             LineaPedido lineaPedido = new LineaPedido();
             
-            if(pedido==null){                
+            if(pedido==null){                //si no existe un pedido en sesion lo creamos
                 pedidoDao.insertPedido(usuario.getIdUsuario());
                 pedido=pedidoDao.getPedido(usuario.getIdUsuario());
                 pedido.setLineasPedido(lineaDao.getLineasPedido(pedido.getIdPedido()));
             }
-            
+            //generamos una nueva linea de pedido
             lineaPedido.setIdPedido(pedido.getIdPedido());
             lineaPedido.setIdProducto(idProducto);
-            if(pedido.getLineasPedido().size()==0){
+            if(pedido.getLineasPedido().size()==0){//si es la primera linea de pedido le ponemos el numero de linea 1
                 lineaPedido.setNumeroLinea(1);
-            }else{
+            }else{ // si ya hay lineas de pedido le ponemos el numero de linea siguiente al de la ultima linea de pedido
             lineaPedido.setNumeroLinea(pedido.getLineasPedido().get(pedido.getLineasPedido().size()-1).getNumeroLinea()+1);
             }
             lineaPedido.setCantidad(1);

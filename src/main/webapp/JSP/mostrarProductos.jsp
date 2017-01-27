@@ -64,6 +64,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
                         <div class="div-breadcrumb col-xs-12 col-sm-12">
+                            <!--migas de pan a partir del parametro que llegue(de donde vengamos)-->
                             <ul class="breadcrumb col-sm-6">
                                 <li><a href="${contexto}/">Inicio</a></li>
                             <li class="active">
@@ -122,7 +123,7 @@
                             <tbody id="cuerpo">
                                 <c:set var="contador" value="0"/>
                                 <c:forEach var="producto" items="${productos}">
-
+                                    <!--comprobamos segun los parametros que nos llegan, que productos debemos mostrar-->
                                     <c:if test="${param.opcion=='all'||producto.oferta==param.opcion||producto.categoria==param.cat||(param.palabra!=null&&(fn:contains(fn:toLowerCase(producto.denominacion), fn:toLowerCase(param.palabra))||fn:contains(fn:toLowerCase(producto.categoria), fn:toLowerCase(param.palabra))))}">
                                         <c:set var="contador" value="${contador+1}"/>
                                         <tr id="fila">

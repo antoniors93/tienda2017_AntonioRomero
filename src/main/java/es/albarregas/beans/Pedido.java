@@ -5,6 +5,7 @@
  */
 package es.albarregas.beans;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Antonio
  */
-public class Pedido {
+public class Pedido implements Serializable{
     
     private int IdPedido;
     private Date Fecha;

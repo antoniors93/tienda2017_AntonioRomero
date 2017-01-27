@@ -5,11 +5,13 @@
  */
 package es.albarregas.beans;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Antonio
  */
-public class LineaPedido {
+public class LineaPedido implements Serializable{
     
     private int IdPedido;
     private int NumeroLinea;

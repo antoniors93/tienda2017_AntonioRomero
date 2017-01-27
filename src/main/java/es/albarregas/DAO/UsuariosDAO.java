@@ -21,11 +21,11 @@ public class UsuariosDAO implements IUsuariosDAO {
     ConnectionFactory conexion = null;
 
     @Override
-    public Usuarios getUsuarios(String Email) {
+    public Usuarios getUsuarios(String Email, String Password) {
         Usuarios usuario=null;
         try {
             sentencia = conexion.getConnection().createStatement();
-            resultado = sentencia.executeQuery("select * from usuarios where Email='"+Email+"'");
+            resultado = sentencia.executeQuery("select * from usuarios where Email='"+Email+"' and clave=PASSWORD('"+Password+"')");
             if(resultado.next()){
               usuario=new Usuarios();
               usuario.setIdUsuario(resultado.getInt("IdUsuario"));
@@ -46,7 +46,23 @@ public class UsuariosDAO implements IUsuariosDAO {
         try {
             sentencia = conexion.getConnection().createStatement();
             sentencia.executeUpdate("insert into Usuarios (Email,Clave,UltimoAcceso,Tipo) values "
-                    + "('"+Email+"', '"+Password+"',now(),'u')");
+                    + "('"+Email+"', PASSWORD('"+Password+"'),now(),'u')");
+                mensaje = "SUCCESS";
+            } catch (SQLException e) {
+                mensaje = "FAILURE";
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+        return mensaje;
+    }
+
+    @Override
+    public String updatePassword(Integer IdUsuario, String Password) {
+        String mensaje = null;
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("update Usuarios set clave=PASSWORD('"+Password+"') where IdUsuario="+IdUsuario);
                 mensaje = "SUCCESS";
             } catch (SQLException e) {
                 mensaje = "FAILURE";

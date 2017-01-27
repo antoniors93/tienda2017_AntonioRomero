@@ -358,11 +358,13 @@ body{
     color: #006064;
 }
 .lista-compras{
+    font-size: 14px;
     width: 80%;
     margin-left:10%;
     padding: 3rem 0 3rem 0;
 }
 .lista-compras ul{
+    font-size: 14px;
     list-style: none;
 }
 

@@ -33,6 +33,7 @@
                                 <th>Cantidad</th>
                                 <th>Eliminar</th>
                             </tr>
+                            <!--Mostramos las lineas de pedido del pedido de la sesion y mostramos los datos del producto-->
                             <c:set var="contador" value="0"/>      
                             <c:forEach var="linea" items="${pedido.lineasPedido}">
                                 <c:forEach var="producto" items="${productos}">
@@ -47,8 +48,7 @@
                                                     <option value="${valor}"><c:out value="${valor}"/></option>
                                                     <c:if test="${linea.cantidad==valor}">
                                                         <option value="${valor}" selected=""><c:out value="${valor}"/></option>
-                                                    </c:if>
-                                                    
+                                                    </c:if>                                                    
                                                 </c:forEach>
                                             </select>
                                         </td>

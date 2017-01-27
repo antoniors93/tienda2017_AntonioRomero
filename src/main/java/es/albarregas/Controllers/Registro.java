@@ -56,7 +56,7 @@ public class Registro extends HttpServlet {
             
             if(mensaje.equalsIgnoreCase("SUCCESS")){ //si la insercion ha sido correcta(si la insercion ha fallado devolvemos el mensaje FAILURE)
                 //obtenemos el usuario
-                Usuarios usuario=usersDao.getUsuarios(request.getParameter("email"));
+                Usuarios usuario=usersDao.getUsuarios(request.getParameter("email"),request.getParameter("pass"));
                 //creamos un cliente (vacio) y lo obtenemos
                 clientDao.insertCliente(usuario.getIdUsuario());
                 Clientes cliente=clientDao.getCliente(usuario.getIdUsuario());

@@ -100,6 +100,7 @@
         </div>
         <jsp:include page="../INC/pie.jsp"></jsp:include>
         <script>
+            //script que muestra el modal si venimos del carrito y no estamos registrados
             $(document).ready(function() {
                 if(${comprar}){                    
                     $("#modalMensaje").modal("show");
@@ -107,6 +108,7 @@
             });
         </script>
             <script>
+                //script que carga la select de provincias
             $(document).ready(function() {
                 var provs="cargarProvs";
                 $.post('${contexto}/Localidades', {
@@ -120,8 +122,8 @@
                 });
         </script>
         <script>
+            //script que carga los pueblos de una provincia
             $(document).ready(function () {
-
                 $('#provincias').change(function (event) {
                     var idProvincia = $(this).val();
                     $.post('${contexto}/Localidades', {
@@ -137,6 +139,7 @@
             });
         </script>
         <script>
+            //script que carga los cp de un pueblo
             $(document).ready(function () {
 
                 $('#pueblos').change(function (event) {

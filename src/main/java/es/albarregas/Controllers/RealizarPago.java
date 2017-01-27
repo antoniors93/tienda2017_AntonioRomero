@@ -53,13 +53,13 @@ public class RealizarPago extends HttpServlet {
             
             String estado="r";
             double baseImponible=0;
-            for(int i=0; i<lineaspedido.size();i++){
+            for(int i=0; i<lineaspedido.size();i++){//recorremos todas las lineas del pedido para calcular el importe total
                 Productos producto = prodsDao.getProducto(lineaspedido.get(i).getIdProducto());
                 double precio=producto.getPrecioUnitario();
                 baseImponible=baseImponible+precio*lineaspedido.get(i).getCantidad();
-                if(producto.getStock()>=lineaspedido.get(i).getCantidad()){                  
+                if(producto.getStock()>=lineaspedido.get(i).getCantidad()){   //si hay stock el estado sera r y disminuiremos el stock en la bd               
                     prodsDao.updateStock(producto.getIdProducto(), producto.getStock()-lineaspedido.get(i).getCantidad());
-                }else{
+                }else{//si no hay stock el pedido quedara pendiente
                     estado="p";
                 }
             }

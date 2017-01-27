@@ -28,7 +28,7 @@
                             <ul>
                                 <li><a href="${contexto}/JSP/actualizarCliente.jsp">Actualizar mis datos</a></li>
                                 <li><a href="${contexto}/PedidosCliente">Consultar mis compras</a></li>
-                                <li><a href="">Cambiar mi contraseña</a></li>
+                                <li><a href="${contexto}/JSP/cambiarPassword.jsp">Cambiar mi contraseña</a></li>
                             </ul>
                         </div>
                         <div class="info-perfil col-sm-7 col-xs-12">

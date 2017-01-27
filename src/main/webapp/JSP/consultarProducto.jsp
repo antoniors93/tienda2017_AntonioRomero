@@ -19,6 +19,7 @@
                     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
                         <div class="div-breadcrumb col-xs-12 col-sm-12">
                             <ul class="breadcrumb col-sm-6">
+                                <!--Segun de donde vengamos(param) generaremos un enlace en la miga de pan-->
                                 <li><a href="${contexto}/">Inicio</a></li>
                                 <c:if test="${param.opcion!='slide'}">
                                 <li>
@@ -108,10 +109,12 @@
         </div>
         <jsp:include page="../INC/pie.jsp"></jsp:include>                        
         <script>            
+            //añadimos la clase active a los primeros items del carousel
             $(".carousel-indicators li:first").addClass("active");
             $(".carousel-inner .item:first").addClass("active");
         </script>
         <script>
+            //llamamos al servlet Compra cuando pulsamos el boton de añadir al crrito
         $(document).ready(function() {
                 $('#añadir-producto').click(function(event) {
                     if(${producto.stock==0}){

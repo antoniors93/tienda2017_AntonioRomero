@@ -5,11 +5,13 @@
  */
 package es.albarregas.beans;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Antonio
  */
-public class Pueblos {
+public class Pueblos implements Serializable{
     
     private int IdPueblo;
     private int IdProvincia;

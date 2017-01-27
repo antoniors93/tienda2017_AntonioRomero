@@ -28,6 +28,7 @@
                             <div class="cuerpo-perfil col-sm-12 col-xs-12">
                         <h2 class="text-center">Compras realizadas</h2>
                         <ul class="lista-compras">
+                            <!--Recorremos los pedidos y dentro de cada uno de ellos recorremos las lineas de pedido mostrando los datos-->
                         <c:forEach var="pedido" items="${pedidos}">
                             <li>Pedido <c:out value="${pedido.idPedido}"/> (<c:out value="${pedido.fecha}"/>)</li>
                             <ul>
@@ -41,7 +42,7 @@
                                <c:forEach var="linea" items="${pedido.lineasPedido}">
                                    <c:forEach var="producto" items="${productos}">
                                        <c:if test="${producto.idProducto==linea.idProducto}">
-                                           <li>x<c:out value="${linea.cantidad}"/> <c:out value="${producto.denominacion}"/></li>
+                                           <li><span style="font-size: 10px;">x</span><c:out value="${linea.cantidad}"/> <c:out value="${producto.denominacion}"/></li>
                                        </c:if>
                                    </c:forEach>
                                </c:forEach>
@@ -71,6 +72,7 @@
             </div>
         <jsp:include page="../INC/pie.jsp"></jsp:include>
         <script>
+            //si el pedido ha quedado pendiente mostramos el modal
             $(document).ready(function() {
                 if(${estado=='p'}){                    
                     $("#modalMensaje").modal("show");

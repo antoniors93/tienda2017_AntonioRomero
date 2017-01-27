@@ -9,6 +9,7 @@ import es.albarregas.DAO.IClientesDAO;
 import es.albarregas.DAO.IDireccionesDAO;
 import es.albarregas.DAO.IProvinciasDAO;
 import es.albarregas.DAO.IPueblosDAO;
+import es.albarregas.DAO.IUsuariosDAO;
 import es.albarregas.beans.Clientes;
 import es.albarregas.beans.Direcciones;
 import es.albarregas.beans.Pueblos;
@@ -46,6 +47,7 @@ public class ActualizarCliente extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             DAOFactory daof = DAOFactory.getDAOFactory(1);
+            IUsuariosDAO userDao = daof.getUsuarios();
             IClientesDAO clientDao = daof.getClientes();
             IDireccionesDAO dirDao = daof.getDirecciones();
             IPueblosDAO puebloDao = daof.getPueblos();
@@ -53,23 +55,26 @@ public class ActualizarCliente extends HttpServlet {
             HttpSession sesion= request.getSession(true);
             Clientes sesionClient=(Clientes)sesion.getAttribute("cliente");
             
-            if(request.getParameter("datos")!=null){
+            
+            if(request.getParameter("datos")!=null){ //si modificamos los datos del cliente
+                //recogemos los datos del formulario
                 Clientes cliente=new Clientes();
                 cliente.setIdCliente(sesionClient.getIdCliente());
                 cliente.setNombre(request.getParameter("nombre"));
                 cliente.setApellidos(request.getParameter("apellidos"));
                 cliente.setNIF(request.getParameter("nif"));
                 cliente.setFechaNacimiento(Date.valueOf(request.getParameter("fechaNac")));
-                
+                //si algun campo ha cambiado, actualizamos
                 if(!cliente.getNombre().equals(sesionClient.getNombre())||!cliente.getApellidos().equals(sesionClient.getApellidos())||
                    !cliente.getNIF().equals(sesionClient.getNIF())||!cliente.getFechaNacimiento().equals(sesionClient.getFechaNacimiento())){
                     clientDao.updateCliente(cliente);
                     sesion.setAttribute("cliente", cliente);
                 }
             }
-            if(request.getParameter("direccion")!=null){
+            
+            if(request.getParameter("direccion")!=null){//cuando añadimos una direccion
                 Direcciones direccion = new Direcciones();
-                
+                //recogemos los datos del formulario
                 direccion.setIdCliente(sesionClient.getIdCliente());
                 direccion.setNombreDireccion(request.getParameter("nombreDireccion"));
                 direccion.setDireccion(request.getParameter("direccion"));
@@ -84,12 +89,12 @@ public class ActualizarCliente extends HttpServlet {
                 
                 ArrayList<Direcciones> direcciones=dirDao.getDirecciones(sesionClient.getIdCliente());
                 
-                if(direcciones==null){                                       
+                if(direcciones==null){      //si no hay direcciones creamos un arraylist nuevo para almacenar en sesion                                 
                     direcciones = new ArrayList();
                     direcciones.add(direccion);
                     sesionClient.setDirecciones(direcciones);
                     sesion.setAttribute("cliente", sesionClient);
-                }else{
+                }else{ //si ya hay direcciones añadimos la nueva y actualizamos la sesion
                     for(int i=0; i<direcciones.size();i++){
                         pueblo=puebloDao.getNombreCodigoPostal(direcciones.get(i).getIdPueblo());
                         direcciones.get(i).setLocalidad(pueblo.getNombrePueblo());
@@ -101,7 +106,12 @@ public class ActualizarCliente extends HttpServlet {
                 }
                 dirDao.insertarDireccion(direccion);
             }
-             response.sendRedirect("JSP/perfilCliente.jsp");
+            
+            if(request.getParameter("pass1")!=null){//cuando cambiamos la password
+                userDao.updatePassword(sesionClient.getIdCliente(), request.getParameter("pass1"));
+            }
+
+             response.sendRedirect(request.getContextPath()+"/JSP/perfilCliente.jsp");
         }
     }
 
