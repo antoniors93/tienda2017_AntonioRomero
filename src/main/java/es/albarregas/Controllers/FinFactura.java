@@ -5,17 +5,9 @@
  */
 package es.albarregas.Controllers;
 
-import es.albarregas.DAO.IPedidosDAO;
-import es.albarregas.DAO.IProductosDAO;
-import es.albarregas.beans.General;
-import es.albarregas.beans.LineaPedido;
 import es.albarregas.beans.Pedido;
-import es.albarregas.beans.Productos;
-import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Antonio
  */
-@WebServlet(name = "RealizarPago", urlPatterns = {"/RealizarPago"})
-public class RealizarPago extends HttpServlet {
+@WebServlet(name = "FinFactura", urlPatterns = {"/FinFactura"})
+public class FinFactura extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,37 +37,10 @@ public class RealizarPago extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            DAOFactory daof = DAOFactory.getDAOFactory(1);
-            IPedidosDAO pedidoDao = daof.getPedidos();     
-            IProductosDAO prodsDao = daof.getProductos();
             HttpSession sesion= request.getSession(true);
             
-            Pedido pedido=(Pedido)sesion.getAttribute("pedido");
-            ArrayList<LineaPedido> lineaspedido = pedido.getLineasPedido();
-            
-            String estado="r";
-            double baseImponible=0;
-            for(int i=0; i<lineaspedido.size();i++){//recorremos todas las lineas del pedido para calcular el importe total
-                Productos producto = prodsDao.getProducto(lineaspedido.get(i).getIdProducto());
-                double precio=producto.getPrecioUnitario();
-                baseImponible=baseImponible+precio*lineaspedido.get(i).getCantidad();
-                if(producto.getStock()>=lineaspedido.get(i).getCantidad()){   //si hay stock el estado sera r y disminuiremos el stock en la bd               
-                    prodsDao.updateStock(producto.getIdProducto(), producto.getStock()-lineaspedido.get(i).getCantidad());
-                }else{//si no hay stock el pedido quedara pendiente
-                    estado="p";
-                }               
-            }
-            
-            ServletContext context = getServletContext();
-            General general=(General)context.getAttribute("general");
-            baseImponible=baseImponible+general.getGastosEnvio();
-            
-            pedidoDao.updatePedido(pedido.getIdPedido(), estado, baseImponible);
-            pedido.setBaseImponible(baseImponible);
-            pedido.setEstado(estado.charAt(0));
-            sesion.setAttribute("pedido", pedido);
-            response.sendRedirect(request.getContextPath()+"/JSP/facturaPedido.jsp");
-            
+            request.setAttribute("estado", request.getParameter("estado"));
+            request.getRequestDispatcher("PedidosCliente").forward(request, response);
         }
     }
 

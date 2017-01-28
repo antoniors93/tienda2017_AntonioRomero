@@ -70,6 +70,7 @@ public class ActualizarCliente extends HttpServlet {
                     clientDao.updateCliente(cliente);
                     sesion.setAttribute("cliente", cliente);
                 }
+                response.sendRedirect(request.getContextPath()+"/JSP/actualizarCliente.jsp");
             }
             
             if(request.getParameter("direccion")!=null){//cuando añadimos una direccion
@@ -105,13 +106,14 @@ public class ActualizarCliente extends HttpServlet {
                     sesion.setAttribute("cliente", sesionClient);
                 }
                 dirDao.insertarDireccion(direccion);
+                response.sendRedirect(request.getContextPath()+"/JSP/perfilCliente.jsp");
             }
             
             if(request.getParameter("pass1")!=null){//cuando cambiamos la password
                 userDao.updatePassword(sesionClient.getIdCliente(), request.getParameter("pass1"));
             }
 
-             response.sendRedirect(request.getContextPath()+"/JSP/perfilCliente.jsp");
+             
         }
     }
 

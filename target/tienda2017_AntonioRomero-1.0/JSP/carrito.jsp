@@ -64,7 +64,7 @@
                            </c:if>
                            <c:if test="${contador!=0}">
                                 <tr>
-                                    <td id="precGeneral" colspan="4" style="font-size: 18px; padding-bottom: 1rem;"><p id="precTotal">Precio total:</p> <p style="font-size: 10px;">(iva y gastos de envío no incluidos)</p></td>
+                                    <td id="precGeneral" colspan="4" style="font-size: 18px; padding-bottom: 1rem;"><p id="precTotal">Precio total:</p> <p style="font-size: 10px;">(10€ de gastos de envío incluídos)</p></td>
                                 </tr>
                            </c:if>
                         </table>
@@ -143,6 +143,7 @@
                     var precio=$(this).find('.precioU').text();
                     total=total+cant*precio;
                 });
+                total=total+${general.gastosEnvio};
                 return parseFloat(total).toFixed(2);
             }
             </script>

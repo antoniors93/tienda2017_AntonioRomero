@@ -6,8 +6,10 @@
 package es.albarregas.events;
 
 import es.albarregas.DAO.ICategoriasDAO;
+import es.albarregas.DAO.IGeneralDAO;
 import es.albarregas.DAO.IProductosDAO;
 import es.albarregas.beans.Categorias;
+import es.albarregas.beans.General;
 import es.albarregas.beans.Productos;
 import es.albarregas.daofactory.DAOFactory;
 import java.util.ArrayList;
@@ -28,10 +30,13 @@ public class Inicializar implements ServletContextListener{
         DAOFactory daof = DAOFactory.getDAOFactory(1);
         ICategoriasDAO cat =daof.getCategorias();
         IProductosDAO prod = daof.getProductos();
+        IGeneralDAO gen = daof.getGeneral();
+        General general = gen.getGeneral();
         ArrayList<Categorias> categorias = cat.getCategorias();
         ArrayList<Productos> productos = prod.getProductos();
         ServletContext context = sce.getServletContext();
         synchronized (context){
+            context.setAttribute("general", general);
             context.setAttribute("productos", productos);
             context.setAttribute("categorias", categorias);
         }
@@ -42,6 +47,7 @@ public class Inicializar implements ServletContextListener{
         ServletContext context = sce.getServletContext();
         context.removeAttribute("productos");
         context.removeAttribute("categorias");
+        context.removeAttribute("general");
     }
     
 }

@@ -416,7 +416,8 @@ body{
     background-color: white; 
     box-shadow: 2px 2px 3px rgba(36,153,136,0.6);
 }
-.cuerpo-final h3{
+.cuerpo-final h2{
+    color: #006064;
     margin-bottom: 3rem;
 }
 .cuerpo-final ul{
