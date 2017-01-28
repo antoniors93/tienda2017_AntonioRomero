@@ -51,8 +51,9 @@ public class RealizarPago extends HttpServlet {
             HttpSession sesion= request.getSession(true);
             
             Pedido pedido=(Pedido)sesion.getAttribute("pedido");
+            if(pedido!=null){
             ArrayList<LineaPedido> lineaspedido = pedido.getLineasPedido();
-            
+
             String estado="r";
             double baseImponible=0;
             for(int i=0; i<lineaspedido.size();i++){//recorremos todas las lineas del pedido para calcular el importe total
@@ -73,8 +74,12 @@ public class RealizarPago extends HttpServlet {
             pedidoDao.updatePedido(pedido.getIdPedido(), estado, baseImponible);
             pedido.setBaseImponible(baseImponible);
             pedido.setEstado(estado.charAt(0));
+            
             sesion.setAttribute("pedido", pedido);
             response.sendRedirect(request.getContextPath()+"/JSP/facturaPedido.jsp");
+            }else{
+                response.sendRedirect(request.getContextPath()+"/JSP/carrito.jsp");
+            }
             
         }
     }

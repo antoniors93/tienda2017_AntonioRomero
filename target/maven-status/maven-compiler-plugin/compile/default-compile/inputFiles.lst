@@ -1,6 +1,8 @@
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\beans\Clientes.java
+C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\GeneralDAO.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\events\Inicializar.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\Controllers\ActualizarCliente.java
+C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\IGeneralDAO.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\beans\Direcciones.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\Controllers\OperacionesCarrito.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\beans\Productos.java
@@ -33,8 +35,10 @@ C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\ja
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\Controllers\FinalizarCompra.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\beans\Pedido.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\IProductosDAO.java
+C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\beans\General.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\beans\Usuarios.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\Controllers\Login.java
+C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\Controllers\FinFactura.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\Controllers\RealizarPago.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\beans\Categorias.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\ProductosDAO.java
