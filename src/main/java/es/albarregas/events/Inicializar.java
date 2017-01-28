@@ -34,11 +34,13 @@ public class Inicializar implements ServletContextListener{
         General general = gen.getGeneral();
         ArrayList<Categorias> categorias = cat.getCategorias();
         ArrayList<Productos> productos = prod.getProductos();
+        ArrayList<Integer> masVendidos = prod.getMasVendidos();
         ServletContext context = sce.getServletContext();
         synchronized (context){
             context.setAttribute("general", general);
             context.setAttribute("productos", productos);
             context.setAttribute("categorias", categorias);
+            context.setAttribute("masVendidos", masVendidos);
         }
     }
 
@@ -48,6 +50,7 @@ public class Inicializar implements ServletContextListener{
         context.removeAttribute("productos");
         context.removeAttribute("categorias");
         context.removeAttribute("general");
+        context.removeAttribute("masVendidos");
     }
     
 }

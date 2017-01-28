@@ -36,7 +36,7 @@
             <div class="col-xs-12 col-sm-9">
                 <div id="carousel-example-generic" class="carousel slide text-center carousel-index" data-ride="carousel">
                     <h3 class="titulo-slide">Ofertas</h3>
-                    <ol class="carousel-indicators">                        
+                    <ol class="carousel-indicators indicators1">                        
                         <c:set var="contador" value="0"/>
                         <c:forEach items="${productos}" var="producto">
                             <c:if test="${producto.oferta=='s'}">
@@ -46,7 +46,7 @@
                         </c:forEach>                                                                                         
                     </ol>
                     <!-- Wrapper for slides -->
-                    <div class="carousel-inner " role="listbox">
+                    <div class="carousel-inner inner1" role="listbox">
                         <c:forEach items="${productos}" var="producto">
                             <c:if test="${producto.oferta=='s'}">
                                 <div class="item">
@@ -74,25 +74,35 @@
                 <div id="myCarousel" class="carousel slide text-center carousel-index" data-ride="carousel">
                     <h3 class="titulo-slide">Más vendidos</h3>
                     <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <ol class="carousel-indicators indicators2">
+                        <c:set var="contadorv" value="0"/>
+                        <c:forEach items="${masVendidos}" var="vendido">
+                            <c:forEach items="${productos}" var="producto">
+                                <c:if test="${producto.idProducto==vendido}">
+                                    <li data-target="#myCarousel" data-slide-to="${contadorv}"></li>
+                                    <c:set var="contadorv" value="${contadorv+1}"/> 
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
                     </ol>
 
                     <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img class="imagen-idx" src="${contexto}/IMG/imagenesProductos/1001.1.jpg" alt="Chania">
-                        </div>
-
-                        <div class="item">
-                            <img class="imagen-idx" src="${contexto}/IMG/imagenesProductos/1021.2.jpg" alt="Chania">
-                        </div>
-
-                        <div class="item">
-                            <img class="imagen-idx" src="${contexto}/IMG/imagenesProductos/13011.2.jpg" alt="Flower">
-                        </div>
+                    <div class="carousel-inner inner2" role="listbox">
+                        <c:forEach items="${masVendidos}" var="vendido">
+                            <c:forEach items="${productos}" var="producto">
+                                <c:if test="${producto.idProducto==vendido}">
+                                    <div class="item">
+                                        <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=slide">
+                                            <img class="imagen-idx" src="IMG/imagenesProductos/${producto.imagen}"/>
+                                        </a>
+                                        <div class="carousel-caption">
+                                        <h4 class="titulo-producto-slide"><c:out value="${producto.denominacion}"/></h4>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
+                        
                     </div>
 
                     <!-- Left and right controls -->
@@ -112,8 +122,10 @@
     </div>
     <jsp:include page="INC/pie.jsp"></jsp:include>
     <script>
-        $(".carousel-indicators li:first").addClass("active");
-        $(".carousel-inner .item:first").addClass("active");
+        $(".indicators1 li:first").addClass("active");
+        $(".inner1 .item:first").addClass("active");
+        $(".indicators2 li:first").addClass("active");
+        $(".inner2 .item:first").addClass("active");
 
 
         $(".categorias").hover(function () {

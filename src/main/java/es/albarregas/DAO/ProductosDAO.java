@@ -92,4 +92,23 @@ public class ProductosDAO implements IProductosDAO {
         ConnectionFactory.closeConnection();
     }
 
+    @Override
+    public ArrayList<Integer> getMasVendidos() {
+        ArrayList<Integer> masVendidos = null;
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            resultado = sentencia.executeQuery("select idProducto, count(idProducto) as total from lineaspedidos group by idProducto order by total desc limit 4;");
+            masVendidos = new ArrayList();
+            while (resultado.next()) {
+                int producto=resultado.getInt("idProducto");
+                masVendidos.add(producto);
+            }
+        } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+        }
+        ConnectionFactory.closeConnection();
+        return masVendidos;
+    }
+
 }

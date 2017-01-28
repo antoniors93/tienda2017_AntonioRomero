@@ -16,4 +16,5 @@ public interface IProductosDAO {
     public ArrayList<Productos> getProductos();
     public Productos getProducto(Integer IdProducto);
     public void updateStock(Integer IdProducto, int cantidad);
+    public ArrayList<Integer> getMasVendidos();
 }
