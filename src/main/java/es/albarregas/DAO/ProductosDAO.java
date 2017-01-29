@@ -28,8 +28,8 @@ public class ProductosDAO implements IProductosDAO {
         try {
             sentencia = conexion.getConnection().createStatement();
             resultado = sentencia.executeQuery("select IdProducto,Productos.Denominacion,Descripcion,PrecioUnitario,Marcas.Denominacion,Nombre,"
-                    + "(select Image from Imagenes where Imagenes.IdProducto=Productos.IdProducto limit 1) as Imagen,Oferta,Stock"
-                    + " from Productos inner join Marcas using(IdMarca) inner join Categorias using(IdCategoria)");
+                    + "(select Image from Imagenes where Imagenes.IdProducto=Productos.IdProducto limit 1) as Imagen,Oferta,Stock,StockMinimo"
+                    + " from Productos inner join Marcas using(IdMarca) inner join Categorias using(IdCategoria) where FueraCatalogo='n'");
             productos = new ArrayList();
             while (resultado.next()) {
                 producto = new Productos();
@@ -42,6 +42,7 @@ public class ProductosDAO implements IProductosDAO {
                 producto.setImagen(resultado.getString("Imagen"));
                 producto.setOferta(resultado.getString("Oferta"));
                 producto.setStock(resultado.getInt("Stock"));
+                producto.setStockMinimo(resultado.getInt("StockMinimo"));
                 productos.add(producto);
             }
         } catch (SQLException e) {
@@ -97,7 +98,7 @@ public class ProductosDAO implements IProductosDAO {
         ArrayList<Integer> masVendidos = null;
         try {
             sentencia = conexion.getConnection().createStatement();
-            resultado = sentencia.executeQuery("select idProducto, count(idProducto) as total from lineaspedidos group by idProducto order by total desc limit 4;");
+            resultado = sentencia.executeQuery("select idProducto, count(idProducto) as total from lineaspedidos group by idProducto order by total desc limit 5;");
             masVendidos = new ArrayList();
             while (resultado.next()) {
                 int producto=resultado.getInt("idProducto");
@@ -109,6 +110,19 @@ public class ProductosDAO implements IProductosDAO {
         }
         ConnectionFactory.closeConnection();
         return masVendidos;
+    }
+
+    @Override
+    public void pedirProductos(Integer Stock) {
+        
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("update productos set stock=stock+"+Stock+" where stock<stockminimo");
+        } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+        }
+        ConnectionFactory.closeConnection();
     }
 
 }

@@ -29,6 +29,9 @@
                                 <li><a href="${contexto}/JSP/actualizarCliente.jsp">Actualizar mis datos</a></li>
                                 <li><a href="${contexto}/PedidosCliente">Consultar mis compras</a></li>
                                 <li><a href="${contexto}/JSP/cambiarPassword.jsp">Cambiar mi contraseña</a></li>
+                                <c:if test="${login.tipo eq 'a'.charAt(0)}">
+                                <li><a href="${contexto}/JSP/panelAdministrador.jsp">Panel de administrador</a></li>
+                                </c:if>
                             </ul>
                         </div>
                         <div class="info-perfil col-sm-7 col-xs-12">

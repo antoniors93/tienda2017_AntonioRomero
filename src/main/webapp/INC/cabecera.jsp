@@ -137,6 +137,11 @@
                                 setTimeout(function(){
                                     $('#log-fail').html("<font color='red'>Login incorrecto</font>");
                                 }, 200);                           
+                            }else if(responseText == 'DENIED'){
+                            $('#log-fail').html("");
+                                setTimeout(function(){
+                                    $('#log-fail').html("<font color='red'>Permiso denegado</font>");
+                                }, 200);                           
                             }
 			});
                 });

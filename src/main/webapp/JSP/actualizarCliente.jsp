@@ -26,11 +26,8 @@
                     </div>
                     <div class="cuerpo-perfil col-sm-12 col-xs-12">
                         <div class="info-perfil col-sm-12 col-xs-12">
-                            <div class="col-sm-offset-2 col-sm-8 col-xs-12 text-center">
+                            <div class="col-sm-12 col-xs-12 text-center">
                                 <h2>Actualización de datos</h2>
-                            </div>
-                            <div class="col-sm-2 col-xs-12 text-center">
-                                <i class="fa fa-user-circle fa-4x pull-right" aria-hidden="true"></i>
                             </div>
                             <div class="col-xs-12"></div>
                             <div class="lista-datos-pers col-sm-6">

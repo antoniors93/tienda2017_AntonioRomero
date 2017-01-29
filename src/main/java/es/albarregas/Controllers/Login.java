@@ -65,6 +65,9 @@ public class Login extends HttpServlet {
             if (usuario == null) { //si no se ha encontrado un usuario devolvemos un mensaje de error
                 mensaje = "FAILURE";
             } else {
+                if(usuario.getBloqueado()=='s'){
+                    mensaje = "DENIED";
+                }else{
                 IClientesDAO client = daof.getClientes();
                 Clientes cliente = client.getCliente(usuario.getIdUsuario()); //obtenemos el cliente relacionado con ese usuario
                 Pedido pedido = pedidoDao.getPedido(usuario.getIdUsuario()); //obtenemos el pedido del carrito de ese usuario
@@ -88,7 +91,7 @@ public class Login extends HttpServlet {
                     sesion.setAttribute("pedido", pedido);
                 }
                 mensaje = "SUCCESS";
-
+                }
             }
             response.getWriter().write(mensaje);
         }

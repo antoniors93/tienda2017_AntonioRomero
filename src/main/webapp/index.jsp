@@ -115,12 +115,42 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+                
+                        <c:set var="contadorStock" value="0"/>
+                        <c:forEach var="producto" items="${productos}">
+                            <c:if test="${producto.stock<producto.stockMinimo}">
+                                <c:set var="contadorStock" value="${contadorStock+1}"/>
+                            </c:if>
+                        </c:forEach>        
+                <div id="modalStock" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h3>Aviso</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <h4 style="color:black">Productos bajo stock mínimo.</h4>   
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" data-dismiss="modal" class="btn btn-default">Cerrar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
             </div>               
 
         </div>
     </div>
     <jsp:include page="INC/pie.jsp"></jsp:include>
+    <script>
+            $(document).ready(function() {
+                if(${contadorStock>0 && login.tipo eq 'a'.charAt(0)}){                    
+                    $("#modalStock").modal("show");
+                }
+            });
+    </script>
     <script>
         $(".indicators1 li:first").addClass("active");
         $(".inner1 .item:first").addClass("active");

@@ -370,6 +370,21 @@ body{
 
 
 
+/*panel de administrador*/
+.cuerpo-admin{
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+}
+.cuerpo-admin p{
+    padding: 1rem;
+}
+.cuerpo-admin a{
+    text-decoration: none;
+    font-size: 16px;
+}
+
+
+
 /*carrito*/
 .cuerpo-carrito{
    background-color: white; 

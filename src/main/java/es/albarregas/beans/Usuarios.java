@@ -37,7 +37,6 @@ public class Usuarios implements Serializable{
         this.Email = Email;
     }
 
-
     public String getClave() {
         return Clave;
     }

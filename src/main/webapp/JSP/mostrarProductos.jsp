@@ -124,42 +124,41 @@
                                 <c:set var="contador" value="0"/>
                                 <c:forEach var="producto" items="${productos}">
                                     <!--comprobamos segun los parametros que nos llegan, que productos debemos mostrar-->
-                                    <c:if test="${param.opcion=='all'||producto.oferta==param.opcion||producto.categoria==param.cat||(param.palabra!=null&&(fn:contains(fn:toLowerCase(producto.denominacion), fn:toLowerCase(param.palabra))||fn:contains(fn:toLowerCase(producto.categoria), fn:toLowerCase(param.palabra))))}">
-                                        <c:set var="contador" value="${contador+1}"/>
-                                        <tr id="fila">
-                                            <td> 
-                                                <c:if test="${param.opcion=='all'}">
-                                                    <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=all">
-                                                        <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
-                                                        </div>
-                                                    </a>
-                                                </c:if>
-                                                <c:if test="${param.opcion=='s'}">
-                                                    <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=s">
-                                                        <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
-                                                        </div>
-                                                    </a>
-                                                </c:if>
-                                                <c:if test="${param.palabra!=null}">
-                                                    <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&palabra=${param.palabra}">
-                                                        <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
-                                                        </div>
-                                                    </a> 
-                                                </c:if>
-                                                <c:if test="${param.cat!=null}">
-                                                    <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&cat=${param.cat}">
-                                                        <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
-                                                        </div>
-                                                    </a>
-                                                </c:if> 
-                                            </td>
-                                            <td><c:out value="${producto.denominacion}"/></td>
-                                            <td><c:out value="${producto.marca}"/></td>
-                                            <td><c:out value="${producto.precioUnitario}"/></td>
-                                            <td><c:out value="${producto.stock}"/></td>
-                                        </tr>
-                                    </c:if>
-
+                                        <c:if test="${param.opcion=='all'||producto.oferta==param.opcion||producto.categoria==param.cat||(param.palabra!=null&&(fn:contains(fn:toLowerCase(producto.denominacion), fn:toLowerCase(param.palabra))||fn:contains(fn:toLowerCase(producto.categoria), fn:toLowerCase(param.palabra))))}">
+                                            <c:set var="contador" value="${contador+1}"/>
+                                            <tr id="fila">
+                                                <td> 
+                                                    <c:if test="${param.opcion=='all'}">
+                                                        <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=all">
+                                                            <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                            </div>
+                                                        </a>
+                                                    </c:if>
+                                                    <c:if test="${param.opcion=='s'}">
+                                                        <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&opcion=s">
+                                                            <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                            </div>
+                                                        </a>
+                                                    </c:if>
+                                                    <c:if test="${param.palabra!=null}">
+                                                        <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&palabra=${param.palabra}">
+                                                            <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                            </div>
+                                                        </a> 
+                                                    </c:if>
+                                                    <c:if test="${param.cat!=null}">
+                                                        <a href="${contexto}/ConsultarProducto?idProd=${producto.idProducto}&cat=${param.cat}">
+                                                            <div style="min-height:150px; min-width:150px; background-image: url('${contexto}/IMG/imagenesProductos/${producto.imagen}');background-size: contain; background-position: center center; background-repeat: no-repeat;">
+                                                            </div>
+                                                        </a>
+                                                    </c:if> 
+                                                </td>
+                                                <td><c:out value="${producto.denominacion}"/></td>
+                                                <td><c:out value="${producto.marca}"/></td>
+                                                <td><c:out value="${producto.precioUnitario}"/></td>
+                                                <td><c:out value="${producto.stock}"/></td>
+                                            </tr>
+                                        </c:if>
                                 </c:forEach>
                                 <c:if test="${contador==0}">
                                     <tr>
