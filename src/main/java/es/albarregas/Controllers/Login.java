@@ -69,6 +69,7 @@ public class Login extends HttpServlet {
                     mensaje = "DENIED";
                 }else{
                 IClientesDAO client = daof.getClientes();
+                usr.updateUltimoAcceso(usuario.getIdUsuario());//modificamos ultimo acceso
                 Clientes cliente = client.getCliente(usuario.getIdUsuario()); //obtenemos el cliente relacionado con ese usuario
                 Pedido pedido = pedidoDao.getPedido(usuario.getIdUsuario()); //obtenemos el pedido del carrito de ese usuario
                 ArrayList<Direcciones> direcciones = dirDao.getDirecciones(cliente.getIdCliente()); //obtenemos las direcciones de este cliente

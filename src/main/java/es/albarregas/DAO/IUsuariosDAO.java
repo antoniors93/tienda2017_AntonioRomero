@@ -17,5 +17,7 @@ public interface IUsuariosDAO {
     public String insertUsuario(String UserName, String Password);
     public String updatePassword(Integer IdUsuario, String Password);
     public ArrayList<Usuarios> getAllUsers();
+    public void updateUltimoAcceso(Integer IdCliente);
+    public void bloquearUser(String email, String bloqueado);
 
 }

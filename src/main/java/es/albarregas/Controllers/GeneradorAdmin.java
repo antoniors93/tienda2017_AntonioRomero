@@ -48,9 +48,6 @@ public class GeneradorAdmin extends HttpServlet {
             request.setAttribute("usuarios", usuarios);
             request.getRequestDispatcher("/JSP/bloquearUsuarios.jsp").forward(request, response);
         }
-        if(request.getParameter("productos")!=null){
-            response.sendRedirect(request.getContextPath()+"/JSP/bloquearProductos.jsp");
-        }
         }
     }
 

@@ -6,6 +6,7 @@
 package es.albarregas.Controllers;
 
 import es.albarregas.DAO.IProductosDAO;
+import es.albarregas.DAO.IUsuariosDAO;
 import es.albarregas.beans.Productos;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
@@ -42,6 +43,7 @@ public class OperacionesAdmin extends HttpServlet {
             
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IProductosDAO prodDao = daof.getProductos();
+            IUsuariosDAO userDao = daof.getUsuarios();
             ServletContext context = getServletContext();
             ArrayList<Productos> productos = (ArrayList)context.getAttribute("productos");
             
@@ -55,6 +57,9 @@ public class OperacionesAdmin extends HttpServlet {
                         }
                     }
                 context.setAttribute("productos", productos);
+            }
+            if(request.getParameter("blockUser")!=null){
+                userDao.bloquearUser(request.getParameter("email"),request.getParameter("bloqueado"));
             }
         }
     }

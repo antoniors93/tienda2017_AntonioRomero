@@ -382,7 +382,11 @@ body{
     text-decoration: none;
     font-size: 16px;
 }
-
+.cuerpo-perfil table{
+    margin: 0 auto;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
 
 
 /*carrito*/

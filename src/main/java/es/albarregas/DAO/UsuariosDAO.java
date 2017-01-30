@@ -99,5 +99,29 @@ public class UsuariosDAO implements IUsuariosDAO {
         ConnectionFactory.closeConnection();
         return usuarios;
     }
+
+    @Override
+    public void updateUltimoAcceso(Integer IdCliente) {
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("update Usuarios set UltimoAcceso=now() where IdUsuario="+IdCliente);
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    public void bloquearUser(String email, String bloqueado) {
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("update Usuarios set Bloqueado='"+bloqueado+"' where Email='"+email+"'");
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+    }
     }
     
