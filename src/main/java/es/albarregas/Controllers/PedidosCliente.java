@@ -47,6 +47,7 @@ public class PedidosCliente extends HttpServlet {
             IPedidosDAO pedidoDao = daof.getPedidos();
             ILineasPedidoDAO lineaDao = daof.getLineasPedidos();
             
+            //pasamos por atributo todos los pedidos de un determinado cliente
             Clientes cliente = (Clientes) sesion.getAttribute("cliente");
             ArrayList<Pedido> pedidos=pedidoDao.getPedidos(cliente.getIdCliente());
             for(int i=0; i<pedidos.size();i++){

@@ -60,7 +60,7 @@
                                 </tr>    
                                 <tr class="text-left" style="font-size: 18px; background: #ebeced">
                                     <td><strong>Total/€:</strong></td>
-                                    <td><c:out value="${pedido.baseImponible}"/></td>
+                                    <td><fmt:formatNumber value="${pedido.baseImponible}" maxFractionDigits="2"/></td>
                                 </tr> 
                             </table>
                         </div>

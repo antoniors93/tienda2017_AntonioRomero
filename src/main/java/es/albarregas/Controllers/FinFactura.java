@@ -37,8 +37,6 @@ public class FinFactura extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            HttpSession sesion= request.getSession(true);
-            
             request.setAttribute("estado", request.getParameter("estado"));
             request.getRequestDispatcher("PedidosCliente").forward(request, response);
         }

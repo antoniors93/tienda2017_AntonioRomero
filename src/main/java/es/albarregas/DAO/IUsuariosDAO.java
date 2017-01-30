@@ -5,6 +5,7 @@
  */
 package es.albarregas.DAO;
 import es.albarregas.beans.Usuarios;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,5 +16,6 @@ public interface IUsuariosDAO {
     public Usuarios getUsuarios(String UserName, String Password);
     public String insertUsuario(String UserName, String Password);
     public String updatePassword(Integer IdUsuario, String Password);
+    public ArrayList<Usuarios> getAllUsers();
 
 }

@@ -11,6 +11,7 @@ C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\ja
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\Controllers\Registro.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\LineasPedidoDAO.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\IDireccionesDAO.java
+C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\Controllers\OperacionesAdmin.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\Controllers\CerrarSesion.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\IPueblosDAO.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\IPedidosDAO.java
@@ -46,6 +47,7 @@ C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\ja
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\CategoriasDAO.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\IUsuariosDAO.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\ICaractsProdDAO.java
+C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\Controllers\GeneradorAdmin.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\PedidosDAO.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\filters\UTF8Filter.java
 C:\Users\Antonio\Documents\NetBeansProjects\tienda2017_AntonioRomero\src\main\java\es\albarregas\DAO\UsuariosDAO.java

@@ -49,6 +49,9 @@ public class RealizarPago extends HttpServlet {
             IPedidosDAO pedidoDao = daof.getPedidos();     
             IProductosDAO prodsDao = daof.getProductos();
             HttpSession sesion= request.getSession(true);
+            ServletContext context = getServletContext();
+            ArrayList<Productos> productos = (ArrayList)context.getAttribute("productos");
+            
             
             Pedido pedido=(Pedido)sesion.getAttribute("pedido");
             if(pedido!=null){
@@ -61,13 +64,20 @@ public class RealizarPago extends HttpServlet {
                 double precio=producto.getPrecioUnitario();
                 baseImponible=baseImponible+precio*lineaspedido.get(i).getCantidad();
                 if(producto.getStock()>=lineaspedido.get(i).getCantidad()){   //si hay stock el estado sera r y disminuiremos el stock en la bd               
+                    for(int j=0; j<productos.size();j++){//actualizamos los productos del contexto
+                        if(productos.get(j).getIdProducto()==lineaspedido.get(i).getIdProducto()){
+                            productos.get(j).setStock(productos.get(j).getStock()-lineaspedido.get(i).getCantidad());
+                        }
+                    }
                     prodsDao.updateStock(producto.getIdProducto(), producto.getStock()-lineaspedido.get(i).getCantidad());
                 }else{//si no hay stock el pedido quedara pendiente
                     estado="p";
                 }               
             }
             
-            ServletContext context = getServletContext();
+            //actualizamos el contexto y la base de datos
+            context.setAttribute("productos", productos);
+            context.setAttribute("masVendidos", prodsDao.getMasVendidos());
             General general=(General)context.getAttribute("general");
             baseImponible=baseImponible+general.getGastosEnvio();
             
@@ -75,6 +85,7 @@ public class RealizarPago extends HttpServlet {
             pedido.setBaseImponible(baseImponible);
             pedido.setEstado(estado.charAt(0));
             
+            //pasamos el pedido por sesion para mostrar la factura
             sesion.setAttribute("pedido", pedido);
             response.sendRedirect(request.getContextPath()+"/JSP/facturaPedido.jsp");
             }else{

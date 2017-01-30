@@ -6,9 +6,12 @@
 package es.albarregas.Controllers;
 
 import es.albarregas.DAO.IProductosDAO;
+import es.albarregas.beans.Productos;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,9 +42,19 @@ public class OperacionesAdmin extends HttpServlet {
             
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IProductosDAO prodDao = daof.getProductos();
+            ServletContext context = getServletContext();
+            ArrayList<Productos> productos = (ArrayList)context.getAttribute("productos");
             
             if(request.getParameter("pedir")!=null){
+                //si realizamos un pedido de productos bajo stock minimo actualizamos los productos del contexto
                 prodDao.pedirProductos(Integer.parseInt(request.getParameter("unidades")));
+                context.setAttribute("productos", prodDao.getProductos());
+                for(int j=0; j<productos.size();j++){
+                        if(productos.get(j).getStock()<productos.get(j).getStockMinimo()){
+                            productos.get(j).setStock(productos.get(j).getStock()+Integer.parseInt(request.getParameter("unidades")));
+                        }
+                    }
+                context.setAttribute("productos", productos);
             }
         }
     }

@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import es.albarregas.beans.Usuarios;
+import java.util.ArrayList;
 
 /**
  *
@@ -73,6 +74,30 @@ public class UsuariosDAO implements IUsuariosDAO {
             }
         ConnectionFactory.closeConnection();
         return mensaje;
+    }
+
+    @Override
+    public ArrayList<Usuarios> getAllUsers() {
+        ArrayList<Usuarios> usuarios=null;
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            resultado = sentencia.executeQuery("select * from usuarios");
+            usuarios = new ArrayList();
+            while(resultado.next()){
+              Usuarios usuario=new Usuarios();
+              usuario.setIdUsuario(resultado.getInt("IdUsuario"));
+              usuario.setEmail(resultado.getString("Email"));
+              usuario.setClave(resultado.getString("Clave"));
+              usuario.setTipo(resultado.getString("Tipo").charAt(0));
+              usuario.setBloqueado(resultado.getString("Bloqueado").charAt(0));
+              usuarios.add(usuario);
+            }
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+        return usuarios;
     }
     }
     

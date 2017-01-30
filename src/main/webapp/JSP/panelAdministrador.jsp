@@ -28,8 +28,8 @@
                         <div class="cuerpo-perfil col-sm-12 col-xs-12">
                         <h2 class="text-center">Panel de Administración</h2>
                         <div class="cuerpo-admin col-xs-12 text-center">
-                            <p><a href="">Bloquear/Desbloquear usuarios.</a></p>
-                            <p><a href="">Bloquear/Desbloquear productos.</a></p>
+                            <p><a href="${contexto}/GeneradorAdmin?usuarios=usuarios">Bloquear/Desbloquear usuarios.</a></p>
+                            <p><a href="${contexto}/GeneradorAdmin?productos=productos">Bloquear/Desbloquear productos.</a></p>
                             <p><a href="${contexto}/JSP/pedirProductos.jsp">Realizar pedido de productos bajo stock mínimo.</a></p>
                         </div>
                         </div>

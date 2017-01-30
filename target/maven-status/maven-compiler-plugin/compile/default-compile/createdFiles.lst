@@ -12,6 +12,7 @@ es\albarregas\DAO\ClientesDAO.class
 es\albarregas\Controllers\Localidades.class
 es\albarregas\DAO\PedidosDAO.class
 es\albarregas\Controllers\ConsultarProducto.class
+es\albarregas\Controllers\GeneradorAdmin.class
 es\albarregas\DAO\IUsuariosDAO.class
 es\albarregas\Controllers\Registro.class
 es\albarregas\beans\Direcciones.class
@@ -21,6 +22,7 @@ es\albarregas\events\Inicializar.class
 es\albarregas\beans\Clientes.class
 es\albarregas\DAO\ICategoriasDAO.class
 es\albarregas\DAO\IProductosDAO.class
+es\albarregas\Controllers\OperacionesAdmin.class
 es\albarregas\DAO\CategoriasDAO.class
 es\albarregas\beans\General.class
 es\albarregas\Controllers\PedidosCliente.class
