@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
                         <div class="div-breadcrumb col-xs-12 col-sm-12">
-                            <ul class="breadcrumb col-sm-8">
+                            <ul class="breadcrumb col-sm-9">
                                 <li><a href="${contexto}/">Inicio</a></li>
                             <li><a href="${contexto}/JSP/perfilCliente.jsp">Perfil de usuario</a></li>
                             <li><a href="${contexto}/JSP/panelAdministrador.jsp">Panel de Administración</a></li>
