@@ -23,7 +23,7 @@ public class Productos implements Serializable{
     private String Categoria;
     private String Imagen;
     private String Oferta;
-    private char FueraCatalogo;
+    private String FueraCatalogo;
     private int Stock;
     private int StockMinimo;
     private ArrayList<String> Imagenes;
@@ -37,11 +37,11 @@ public class Productos implements Serializable{
         this.StockMinimo = StockMinimo;
     }
     
-    public char getFueraCatalogo() {
+    public String getFueraCatalogo() {
         return FueraCatalogo;
     }
 
-    public void setFueraCatalogo(char FueraCatalogo) {
+    public void setFueraCatalogo(String FueraCatalogo) {
         this.FueraCatalogo = FueraCatalogo;
     }
 

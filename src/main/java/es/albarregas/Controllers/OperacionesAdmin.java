@@ -47,10 +47,10 @@ public class OperacionesAdmin extends HttpServlet {
             ServletContext context = getServletContext();
             ArrayList<Productos> productos = (ArrayList)context.getAttribute("productos");
             
+            //si realizamos un pedido de productos bajo stock minimo actualizamos los productos del contexto
             if(request.getParameter("pedir")!=null){
-                //si realizamos un pedido de productos bajo stock minimo actualizamos los productos del contexto
+                
                 prodDao.pedirProductos(Integer.parseInt(request.getParameter("unidades")));
-                context.setAttribute("productos", prodDao.getProductos());
                 for(int j=0; j<productos.size();j++){
                         if(productos.get(j).getStock()<productos.get(j).getStockMinimo()){
                             productos.get(j).setStock(productos.get(j).getStock()+Integer.parseInt(request.getParameter("unidades")));
@@ -58,8 +58,39 @@ public class OperacionesAdmin extends HttpServlet {
                     }
                 context.setAttribute("productos", productos);
             }
+            // si hemos bloqueado un usuario
             if(request.getParameter("blockUser")!=null){
                 userDao.bloquearUser(request.getParameter("email"),request.getParameter("bloqueado"));
+            }
+            //si hemos bloqueado un producto
+            if(request.getParameter("blockProd")!=null){
+                prodDao.bloquearProd(request.getParameter("producto"), request.getParameter("bloqueado"));
+                for(int i=0; i<productos.size();i++){
+                        if(productos.get(i).getDenominacion().equals(request.getParameter("producto"))){
+                            productos.get(i).setFueraCatalogo(request.getParameter("bloqueado"));
+                        }
+                    }
+                context.setAttribute("productos", productos);
+            }
+            //si hemos ofertado un producto
+            if(request.getParameter("ofertarProd")!=null){
+                prodDao.ofertarProd(request.getParameter("producto"),request.getParameter("oferta"));
+                for(int i=0; i<productos.size();i++){
+                        if(productos.get(i).getDenominacion().equals(request.getParameter("producto"))){
+                            productos.get(i).setOferta(request.getParameter("oferta"));
+                        }
+                    }
+                context.setAttribute("productos", productos);
+            }           
+            //si cambiamos el precio a un producto
+            if(request.getParameter("cambiarPrecio")!=null){
+                prodDao.cambiarPrecioProd(request.getParameter("producto"),Double.parseDouble(request.getParameter("precioProd")));
+                for(int i=0; i<productos.size();i++){
+                        if(productos.get(i).getDenominacion().equals(request.getParameter("producto"))){
+                            productos.get(i).setPrecioUnitario(Double.parseDouble(request.getParameter("precioProd")));
+                        }
+                    }
+                context.setAttribute("productos", productos);
             }
         }
     }

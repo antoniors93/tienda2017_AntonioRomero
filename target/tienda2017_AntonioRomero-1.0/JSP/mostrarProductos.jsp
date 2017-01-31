@@ -123,6 +123,7 @@
                             <tbody id="cuerpo">
                                 <c:set var="contador" value="0"/>
                                 <c:forEach var="producto" items="${productos}">
+                                    <c:if test="${producto.fueraCatalogo!='s'}">
                                     <!--comprobamos segun los parametros que nos llegan, que productos debemos mostrar-->
                                         <c:if test="${param.opcion=='all'||producto.oferta==param.opcion||producto.categoria==param.cat||(param.palabra!=null&&(fn:contains(fn:toLowerCase(producto.denominacion), fn:toLowerCase(param.palabra))||fn:contains(fn:toLowerCase(producto.categoria), fn:toLowerCase(param.palabra))))}">
                                             <c:set var="contador" value="${contador+1}"/>
@@ -159,6 +160,7 @@
                                                 <td><c:out value="${producto.stock}"/></td>
                                             </tr>
                                         </c:if>
+                                    </c:if>        
                                 </c:forEach>
                                 <c:if test="${contador==0}">
                                     <tr>

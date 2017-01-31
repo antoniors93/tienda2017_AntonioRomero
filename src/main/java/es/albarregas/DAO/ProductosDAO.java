@@ -28,8 +28,8 @@ public class ProductosDAO implements IProductosDAO {
         try {
             sentencia = conexion.getConnection().createStatement();
             resultado = sentencia.executeQuery("select IdProducto,Productos.Denominacion,Descripcion,PrecioUnitario,Marcas.Denominacion,Nombre,"
-                    + "(select Image from Imagenes where Imagenes.IdProducto=Productos.IdProducto limit 1) as Imagen,Oferta,Stock,StockMinimo"
-                    + " from Productos inner join Marcas using(IdMarca) inner join Categorias using(IdCategoria) where FueraCatalogo='n'");
+                    + "(select Image from Imagenes where Imagenes.IdProducto=Productos.IdProducto limit 1) as Imagen,Oferta,FueraCatalogo,Stock,StockMinimo"
+                    + " from Productos inner join Marcas using(IdMarca) inner join Categorias using(IdCategoria)");
             productos = new ArrayList();
             while (resultado.next()) {
                 producto = new Productos();
@@ -41,6 +41,7 @@ public class ProductosDAO implements IProductosDAO {
                 producto.setCategoria(resultado.getString("Nombre"));
                 producto.setImagen(resultado.getString("Imagen"));
                 producto.setOferta(resultado.getString("Oferta"));
+                producto.setFueraCatalogo(resultado.getString("FueraCatalogo"));
                 producto.setStock(resultado.getInt("Stock"));
                 producto.setStockMinimo(resultado.getInt("StockMinimo"));
                 productos.add(producto);
@@ -122,6 +123,39 @@ public class ProductosDAO implements IProductosDAO {
             System.out.println("Problemas al visualizar");
             e.printStackTrace();
         }
+        ConnectionFactory.closeConnection();
+    }
+    
+    public void bloquearProd(String denominacion, String bloqueado) {
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("update Productos set FueraCatalogo='"+bloqueado+"' where Denominacion='"+denominacion+"'");
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+    }
+    
+    public void ofertarProd(String denominacion, String oferta) {
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("update Productos set Oferta='"+oferta+"' where Denominacion='"+denominacion+"'");
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
+        ConnectionFactory.closeConnection();
+    }
+    
+    public void cambiarPrecioProd(String denominacion, double precio) {
+        try {
+            sentencia = conexion.getConnection().createStatement();
+            sentencia.executeUpdate("update Productos set PrecioUnitario="+precio+" where Denominacion='"+denominacion+"'");
+            } catch (SQLException e) {
+            System.out.println("Problemas al visualizar");
+            e.printStackTrace();
+            }
         ConnectionFactory.closeConnection();
     }
 

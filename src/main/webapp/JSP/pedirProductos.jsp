@@ -29,11 +29,16 @@
                         <div class="cuerpo-perfil col-sm-12 col-xs-12">
                         <h2 class="text-center">Productos bajo Stock mínimo</h2>
                         <div class="cuerpo-admin col-xs-12 text-center">
+                            <c:set var="contador" value="0"/>
                             <c:forEach var="producto" items="${productos}">
                             <c:if test="${producto.stock<producto.stockMinimo}">
                                 <p><c:out value="${producto.denominacion}"/></p>
+                                <c:set var="contador" value="${contador+1}"/>
                             </c:if>
                         </c:forEach>
+                                <c:if test="${contador==0}">
+                                    <p>Actualmente no hay productos bajo stock mínimo.</p>
+                                </c:if>
                                     <label>Unidades por producto</label>
                                     <input id="unidades" type="number" min="0" max="30" step="5" value="1"/>
                                 <button class="btn btn-default" id="pedir">Realizar pedido</button>

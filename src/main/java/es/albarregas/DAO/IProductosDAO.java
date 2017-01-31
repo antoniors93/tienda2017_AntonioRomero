@@ -18,4 +18,7 @@ public interface IProductosDAO {
     public void updateStock(Integer IdProducto, int cantidad);
     public ArrayList<Integer> getMasVendidos();
     public void pedirProductos(Integer Stock);
+    public void bloquearProd(String denominacion, String bloqueado);
+    public void ofertarProd(String denominacion, String oferta);
+    public void cambiarPrecioProd(String denominacion, double precio);
 }
