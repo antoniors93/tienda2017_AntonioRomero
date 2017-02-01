@@ -76,7 +76,7 @@
                         <table id="tabla">
                             <thead>
                             <tr>
-                                <th id="usuario" >Producto <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></th>
+                                <th id="usuario">Producto <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></i></th>
                                 <th>En oferta</th>
                             </tr>
                             </thead>

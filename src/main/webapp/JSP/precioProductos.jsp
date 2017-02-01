@@ -76,7 +76,7 @@
                         <table id="tabla-cambiar-precios">
                             <thead>
                             <tr>
-                                <th id="usuario" >Producto <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></th>
+                                <th id="usuario">Producto <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></i></th>
                                 <th>Precio</th>
                                 <th></th>
                             </tr>
@@ -121,7 +121,7 @@
     <jsp:include page="../INC/pie.jsp"></jsp:include>
         <script> 
             
-            
+           
             //icono de ascendente o descendente
             $("#usuario").click(function () {
                 if ($(this).find(".fa-sort-asc").hasClass("hidden")) {
@@ -136,7 +136,7 @@
             
         //funciones para ordenar la tabla    
     function sortTable(f, n) {
-                var rows = $('#tabla tbody  tr').get();
+                var rows = $('#tabla-cambiar-precios tbody  tr').get();
 
                 rows.sort(function (a, b) {
 
@@ -161,7 +161,7 @@
                 }
 
                 $.each(rows, function (index, row) {
-                    $('#tabla').children('tbody').append(row);
+                    $('#tabla-cambiar-precios').children('tbody').append(row);
                 });
             }
             var uno = 1;
