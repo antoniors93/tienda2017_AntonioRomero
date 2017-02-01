@@ -29,9 +29,9 @@
                                         <li>NIF: <c:out value="${cliente.NIF}"/></li>
                                         <li>Fecha de nacimiento: <c:out value="${cliente.fechaNacimiento}"/></li>
                                         <li>Dirección de envío:<br/><br/>
-                                            <select><vr/>
+                                            <select name="dirSelect">
                                                 <c:forEach var="direccion" items="${cliente.direcciones}">
-                                                    <option><c:out value="${direccion.nombreDireccion}"/> 
+                                                    <option value="${direccion.idDireccion}"><c:out value="${direccion.nombreDireccion}"/> 
                                                         <c:out value="${direccion.direccion}"/> 
                                                         <c:out value="${direccion.localidad}"/>/<c:out value="${direccion.provincia}"/> 
                                                         <c:out value="${direccion.codigoPostal}"/> 

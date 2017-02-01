@@ -83,7 +83,7 @@
                             <tbody>
                             <c:forEach items="${productos}" var="producto">
                                 <tr>
-                                    <td class="producto"><c:out value="${producto.denominacion}"/></td>
+                                    <td class="producto text-left "><c:out value="${producto.denominacion}"/></td>
                                     <td><c:if test="${producto.fueraCatalogo=='n'}">
                                             <input class="block" type="checkbox"/>  
                                         </c:if>

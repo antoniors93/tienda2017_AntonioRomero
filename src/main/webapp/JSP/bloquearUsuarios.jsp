@@ -83,7 +83,7 @@
                             <tbody>
                             <c:forEach items="${usuarios}" var="usuario">
                                 <tr>
-                                    <td class="email"><c:out value="${usuario.email}"/></td>
+                                    <td class="email text-left"><c:out value="${usuario.email}"/></td>
                                     <td><c:if test="${usuario.bloqueado=='n'.charAt(0)}">
                                             <input class="block" type="checkbox"/>  
                                         </c:if>

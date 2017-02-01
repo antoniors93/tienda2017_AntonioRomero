@@ -87,7 +87,7 @@ public class RealizarPago extends HttpServlet {
             
             //pasamos el pedido por sesion para mostrar la factura
             sesion.setAttribute("pedido", pedido);
-            response.sendRedirect(request.getContextPath()+"/JSP/facturaPedido.jsp");
+            response.sendRedirect(request.getContextPath()+"/JSP/facturaPedido.jsp?id="+request.getParameter("dirSelect"));
             }else{
                 response.sendRedirect(request.getContextPath()+"/JSP/carrito.jsp");
             }

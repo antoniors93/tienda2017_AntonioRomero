@@ -73,7 +73,7 @@
                     </div>
                     <div class="cuerpo-perfil text-center col-sm-12 col-xs-12">
                         <h2>Modificar precios de productos.</h2>
-                        <table id="tabla">
+                        <table id="tabla-cambiar-precios">
                             <thead>
                             <tr>
                                 <th id="usuario" >Producto <i class="fa fa-sort-asc hidden"></i><i class="fa fa-sort-desc"></th>
@@ -84,12 +84,12 @@
                             <tbody>
                             <c:forEach items="${productos}" var="producto">
                                 <tr>
-                                    <td class="producto"><c:out value="${producto.denominacion}"/></td>
+                                    <td class="producto text-left"><c:out value="${producto.denominacion}"/></td>
                                     <td>
-                                        <input class="precioProd" value="${producto.precioUnitario}" type="number" step="any"/>
+                                        <input class="precioProd" value="${producto.precioUnitario}" type="number" step="any" style="width:50%;"/>
                                     </td>
                                     <td>
-                                        <button class="modPrecio">Modificar</button>
+                                        <button class="modPrecio"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                     </td>
                                 </tr>
                             </c:forEach>

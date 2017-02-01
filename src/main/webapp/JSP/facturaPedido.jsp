@@ -19,14 +19,28 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
                         <div class="cuerpo-carrito col-sm-12 col-xs-12">
-                            <h2 class="text-center">Factura</h2>
-                            <table id="tabla">
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio</th>                                
-                                    <th>Importe</th>
-                                </tr>
+                            <div class="cabecera-factura col-xs-12 col-sm-12">
+                                <div class="col-xs-12 col-sm-4">
+                                    <p><c:out value="${cliente.nombre} ${cliente.apellidos}"/></p>
+                                <p><c:out value="${cliente.NIF}"/></p>
+                                <c:forEach items="${cliente.direcciones}" var="direccion">
+                                    <c:if test="${direccion.idDireccion==param.id}">
+                                        <p><c:out value="${direccion.nombreDireccion} ${direccion.direccion} ${direccion.localidad}/${direccion.provincia}"/></p>
+                                    </c:if>
+                                </c:forEach>
+                            </div>
+                            <div class="col-xs-12 col-sm-offset-5 col-sm-3">
+                                <img class="img-responsive logo" src="${contexto}/IMG/logo1.png"/>
+                            </div>
+                        </div>
+                        <h2 class="text-center">Factura</h2>
+                        <table id="tabla">
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>                                
+                                <th>Importe</th>
+                            </tr>
                             <c:forEach var="linea" items="${pedido.lineasPedido}">
                                 <c:forEach var="producto" items="${productos}">
                                     <c:if test="${linea.idProducto==producto.idProducto}">
@@ -64,10 +78,10 @@
                                 </tr> 
                             </table>
                         </div>
-                            <div class="botones-carrito text-center col-xs-12 col-sm-12">
-                                <a href="${contexto}/FinFactura?estado=${pedido.estado}">Aceptar</a>
+                        <div class="botones-carrito text-center col-xs-12 col-sm-12">
+                            <a href="${contexto}/FinFactura?estado=${pedido.estado}">Aceptar</a>
                         </div>
-                                <c:set var="pedido" scope="session" value="${null}"/>
+                        <c:set var="pedido" scope="session" value="${null}"/>
                     </div>
                 </div>
             </div>
