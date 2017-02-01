@@ -40,6 +40,7 @@
                                                 </c:forEach>
                                             </select>
                                         </li>
+                                        <li><a href="${contexto}/JSP/actualizarCliente.jsp" style="text-decoration: none;">Añadir nueva dirección</a> <i class="fa fa-plus-square" aria-hidden="true"></i></li>
                                     </ul>
                                 </div>
                             </div>
