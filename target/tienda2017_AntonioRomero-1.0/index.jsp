@@ -21,7 +21,7 @@
                         <ul class="nav-principal">
                             <li><a href="${contexto}/JSP/mostrarProductos.jsp?opcion=all">Catálogo de productos</a></li>
                         <li><a href="${contexto}/JSP/mostrarProductos.jsp?opcion=s">Productos en oferta</a></li>
-                        <li><a href="">Productos más vendidos</a></li>
+                        <li><a href="${contexto}/JSP/mostrarProductos.jsp?opcion=v">Productos más vendidos</a></li>
                         <li class="categorias">Categorías
                             <ul class="nav-secundario hidden">
                                 <c:forEach items="${categorias}" var="categoria">
