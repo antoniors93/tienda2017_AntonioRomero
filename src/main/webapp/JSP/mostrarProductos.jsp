@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -145,7 +146,7 @@
                                                         </td>
                                                         <td><c:out value="${producto.denominacion}"/></td>
                                                         <td><c:out value="${producto.marca}"/></td>
-                                                        <td><c:out value="${producto.precioUnitario}"/></td>
+                                                        <td><fmt:formatNumber value="${producto.precioUnitario}" type="currency"/></td>
                                                         <td><c:out value="${producto.stock}"/></td>
                                                         </tr> 
                                                     </c:if>
@@ -189,7 +190,7 @@
                                                     </td>
                                                     <td><c:out value="${producto.denominacion}"/></td>
                                                     <td><c:out value="${producto.marca}"/></td>
-                                                    <td><c:out value="${producto.precioUnitario}"/></td>
+                                                    <td><fmt:formatNumber value="${producto.precioUnitario}" type="currency"/></td>
                                                     <td><c:out value="${producto.stock}"/></td>
                                                 </tr>
                                             </c:if>

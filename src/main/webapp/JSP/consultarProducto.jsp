@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -85,7 +86,7 @@
                                     </c:forEach>
                             </ul>
                             <p>Unidades disponibles: <c:out value="${producto.stock}"/></p>
-                            <p class="precio"><c:out value="${producto.precioUnitario} €"/></p>
+                            <p class="precio"><fmt:formatNumber value="${producto.precioUnitario}" type="currency"/></p>
                         </div>
                     </div>
                     <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">

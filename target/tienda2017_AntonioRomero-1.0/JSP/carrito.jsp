@@ -66,6 +66,9 @@
                                 <tr>
                                     <td id="precGeneral" colspan="4" style="font-size: 18px; padding-bottom: 1rem;"><p id="precTotal">Precio total:</p> <p style="font-size: 10px;">(10€ de gastos de envío incluídos)</p></td>
                                 </tr>
+                                <tr>
+                                    <td id="precGeneral" colspan="4" style="font-size: 16px; padding-bottom: 1rem;"><p id="precTotal">Tiempo estimado de envío: 3 días</p> </td>
+                                </tr>
                            </c:if>
                         </table>
                         <div class="botones-carrito text-center col-xs-12 col-sm-12">

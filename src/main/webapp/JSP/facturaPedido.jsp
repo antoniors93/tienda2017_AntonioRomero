@@ -21,16 +21,20 @@
                         <div class="cuerpo-carrito col-sm-12 col-xs-12">
                             <div class="cabecera-factura col-xs-12 col-sm-12">
                                 <div class="col-xs-12 col-sm-4">
+                                    <br/>
                                     <p><c:out value="${cliente.nombre} ${cliente.apellidos}"/></p>
                                 <p><c:out value="${cliente.NIF}"/></p>
                                 <c:forEach items="${cliente.direcciones}" var="direccion">
                                     <c:if test="${direccion.idDireccion==param.id}">
-                                        <p><c:out value="${direccion.nombreDireccion} ${direccion.direccion} ${direccion.localidad}/${direccion.provincia}"/></p>
+                                        <p><c:out value="${direccion.nombreDireccion} ${direccion.direccion}"/></p>
+                                        <p><c:out value="${direccion.codigoPostal}  ${direccion.localidad} / ${direccion.provincia}"/></p>
                                     </c:if>
                                 </c:forEach>
                             </div>
                             <div class="col-xs-12 col-sm-offset-5 col-sm-3">
                                 <img class="img-responsive logo" src="${contexto}/IMG/logo1.png"/>
+                                <br/>
+                                <p>Polígono Industrial El Prado, Calle Almería, 3, 06800 Mérida/Badajoz</p>
                             </div>
                         </div>
                         <h2 class="text-center">Factura</h2>
@@ -70,11 +74,11 @@
                                 </tr>
                                 <tr class="text-left">
                                     <td><strong>Gastos de envío:</strong></td>
-                                    <td><c:out value="${general.gastosEnvio}"/></td>
+                                    <td><fmt:formatNumber value="${general.gastosEnvio}" minFractionDigits="2"/></td>
                                 </tr>    
                                 <tr class="text-left" style="font-size: 18px; background: #ebeced">
-                                    <td><strong>Total/€:</strong></td>
-                                    <td><fmt:formatNumber value="${pedido.baseImponible}" maxFractionDigits="2"/></td>
+                                    <td><strong>Total:</strong></td>
+                                    <td><fmt:formatNumber value="${pedido.baseImponible}" type="currency"/></td>
                                 </tr> 
                             </table>
                         </div>
