@@ -134,6 +134,7 @@
         <jsp:include page="../INC/pie.jsp"></jsp:include>
         
         <script>
+            //script para calcular el precio total al abrir el carrito
             $('#precTotal').html("Precio total: ");
             $('#precTotal').append(calcularTotal()+"€");
             function calcularTotal(){
@@ -148,6 +149,7 @@
             }
             </script>
             <script> 
+                //script que actualiza la base de datos al eliminar un producto y modifica el precio total
                 $(document).ready(function() {
                     $('.btn-eliminar').click(function(event) {
                         $(this).parent().parent().remove();                      
@@ -170,6 +172,7 @@
                 });
         </script>
         <script> 
+            //script que actualiza la base de datos al cambiar la cantidad y modifica el precio total
             $(document).ready(function() {
                 $('.cantidad').change(function(event) {
                     var cantidad = $(this).val();

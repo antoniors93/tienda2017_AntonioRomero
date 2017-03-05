@@ -43,7 +43,7 @@
                     <div class="cuerpo-prod col-xs-12 col-sm-12">                       
                         <div class="col-xs-12 col-sm-6" >                            
                             <div class="btn-comprar text-center">
-                                <c:if test="${login!=null}">
+                                <c:if test="${login!=null && login.tipo eq 'u'.charAt(0)}">
                                     <button id="añadir-producto" class="enlace-btn-comprar">Añadir al carrito</button>
                                 </c:if>
                             </div>                            
